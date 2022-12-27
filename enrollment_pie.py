@@ -1,123 +1,124 @@
-def enrollment_chart(term, dept_or_year="dept", filename="classlst.xls"):
-    term = "fall22"
-    # term = "spring23"
-    # filenmae = "prereg.xls"
-    # If the class isn't active yet the registrar file would be called 'prereg.xls'
+import json
+import plotly.express as px
+import pandas as pd
 
-    # list = "/Users/shenshen/Codes/000admin/sheets/" + term + "/classlst.xls"
+maps = json.load(open("maps.json"))
+
+
+def read_into_df(term="fall22", filename="classlst.xls", f=None):
     list = "/Users/shenshen/Codes/3900/000admin/sheets/" + term + "/" + filename
-    major_to_dept = {}
+    has_reg = filename.startswith("classlst")
+
     detail_major_list = []
     dept_list = []
     reg_or_can_list = []
     year_list = []
 
     def group_majors(detail_major):
-        if detail_major in major_to_dept:
-            major_to_dept[detail_major]
         try:
-            major_to_dept[detail_major] = str(int(detail_major))
+            return maps["major_to_dept"][detail_major]
         except:
+            print(f"group major {detail_major}")
             s = detail_major.split(" ")
             for j in s:
                 if j != "":
-                    if j == "NIH":
-                        j = "Harvard"
-                    if j == "NIW":
-                        j = "Wellesley"
-                    major_to_dept[detail_major] = j
-                    break
-        if major_to_dept[detail_major] == "NONE":
-            major_to_dept[detail_major] = "no major"
-        return major_to_dept[detail_major]
+                    maps["major_to_dept"][detail_major] = j
+                    with open("maps.json", "w") as f:
+                        json.dump(maps, f, indent=4, sort_keys=True)
+                    return j
 
     def chop_off_white_spaces(s):
-        # there must be better way
-        # print(s)
-        left = 0
-        right = -1
-        for i in range(len(s)):
-            if s[i] != " ":
-                left = i
-                break
-        # hard code for now
-        for j in range(-1, -10, -1):
-            if s[j] != " ":
-                right = len(s) + j + 1
-                break
-        new_s = s[left:right]
-        if new_s == "NONE" or new_s is None:
-            return "no major"
-        return new_s
+        try:
+            return maps["major_without_spaces"][s]
+        except:
+            print(f"chop off {s}")
+            # there must be better way
+            left = 0
+            right = -1
+            for i in range(len(s)):
+                if s[i] != " ":
+                    left = i
+                    break
+            # hard code for now
+            for j in range(-1, -10, -1):
+                if s[j] != " ":
+                    right = len(s) + j + 1
+                    break
+            new_s = s[left:right]
+            maps["major_without_spaces"][s] = new_s
+            with open("maps.json", "w") as f:
+                json.dump(maps, f, indent=4, sort_keys=True)
+            return new_s
 
-    def year_format(s):
-        return "Year " + str(s)
+    CourseTitle = ""
 
-    def reg_cancel_spellout(s):
-        if s == "Can":
-            return "Cancelled"
-        if s == "Reg":
-            return "Registered"
-        if s == "Lis":
-            return "Listener"
-
-    with open(list) as f:
+    def process_f(f):
         for (idx, line) in enumerate(f):
-            if filename == "prereg.xls" and not line.startswith('"9'):
+            if idx == 2:
+                CourseTitle = line
+            if not line.startswith('"9'):
                 continue
             fields = line.split("\t")
             if len(fields) <= 4:
                 continue
-            detial_major = fields[2]
-            if detial_major == "Course" or detial_major.startswith("___"):
+            detail_major = fields[2]
+            if detail_major == "Course" or detail_major.startswith("___"):
                 continue
-            detail_major_list.append(chop_off_white_spaces(detial_major))
-            year_list.append(year_format(fields[3]))
-            dept_list.append(group_majors(detial_major))
-            reg_or_can_list.append(reg_cancel_spellout(fields[4]))
+            detail_major = chop_off_white_spaces(detail_major)
+            detail_major_list.append(detail_major)
+            year_list.append(f"Year {fields[3][1]}")
+            dept_list.append(group_majors(detail_major))
+            if has_reg:
+                reg_or_can_list.append(maps["reg_can"][fields[4]])
+        df = pd.DataFrame(
+            dict(
+                major=detail_major_list,
+                dept=dept_list,
+                year=year_list,
+            )
+        ).convert_dtypes()
+        if has_reg:
+            df["reg_status"] = reg_or_can_list
+        return df, CourseTitle
 
-    import plotly.express as px
-    import pandas as pd
-
-    df = pd.DataFrame(
-        dict(
-            reg_or_can_list=reg_or_can_list,
-            detail_major_list=detail_major_list,
-            dept_list=dept_list,
-            year_list=year_list,
-        )
-    )
-    # print(df)
-
-    if dept_or_year == "dept":
-        path = ["reg_or_can_list", "dept_list", "detail_major_list"]
-        if term == "spring23":
-            path = path[1:]
-        # path[1] = ["Registered"] * len(detail_major_list)
-        fig = px.sunburst(
-            df,
-            path=path,
-            color="detail_major_list",
-            hover_data=["detail_major_list"],
-            color_continuous_scale="RdBu",
-            width=100
-            # color_continuous_midpoint=np.average(df["reg_or_can_list"]),
-        )
+    if f:
+        df, CourseTitle = process_f(f)
     else:
-        path = ["reg_or_can_list", "year_list", "dept_list", "detail_major_list"]
-        if term == "spring23":
-            path = path[1:]
-        fig = px.sunburst(
-            df,
-            path=path,
-            color="dept_list",
-            # hover_data=["detail_major_list"],
-            color_continuous_scale="RdBu",
-            # color_continuous_midpoint=np.average(df["reg_or_can_list"]),
-        )
-    fig.update_layout(margin=dict(t=10, l=0, r=0, b=0))
+        with open(list) as f:
+            df, CourseTitle = process_f(f)
+
+    df["Department"] = df["dept"].map(
+        lambda x: maps["CourseNumber_to_Label"].get(str(x), x)
+    )
+    df.convert_dtypes()
+    df.to_csv(term + "_" + filename.split(".")[0] + ".csv")
+    df.to_csv(CourseTitle + ".csv")
+    return df
+
+
+def enrollment_chart(df, dept_or_year="dept"):
+    if dept_or_year == "dept":
+        path = ["reg_status", "dept", "major"]
+    elif dept_or_year == "year":
+        path = ["reg_status", "dept", "year"]
+    if "reg_status" not in df.columns:
+        path = path[1:]
+    fig = px.sunburst(
+        df,
+        path=path,
+        color="major",
+        # hover_name="Department",
+        hover_data=["major"],
+        color_continuous_scale="RdBu",
+    )
+    fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
+    # print(fig.data[0])
     return fig
 
 
 if __name__ == "__main__":
+    # enrollment_chart("fall22", dept_or_year="dept", filename="classlst.xls")
+    # df = read_into_df("spring23", filename="prereg.xls")
+    df = read_into_df("fall22")
+    fig = enrollment_chart(df)
     fig.show()
