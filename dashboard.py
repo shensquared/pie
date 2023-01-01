@@ -11,15 +11,6 @@ buffer = io.StringIO()
 
 app.layout = html.Div(
     [
-        html.Div(
-            [
-                html.H1(
-                    "Enrollment Pie Chart",
-                    id="title",
-                    title="Enrollment Pie Chart",
-                )
-            ]
-        ),
         dcc.Upload(
             id="upload-data",
             children=html.Div(["Drag and Drop or ", html.A("Select Files")]),
@@ -35,7 +26,10 @@ app.layout = html.Div(
             # Allow multiple files to be uploaded
             multiple=True,
         ),
-        html.Div(id="output-data-upload"),
+        html.H1(
+            "hhh",
+            id="title",
+        ),
         dcc.Tabs(
             id="tabs",
             value="dept",
@@ -45,12 +39,12 @@ app.layout = html.Div(
             ],
         ),
         html.Div(id="tabs-content", style={"width": "100%"}),
-        html.A(
-            html.Button("Download as HTML"),
-            id="download",
-            href="data:text/html;base64," + encoded,
-            download="enrollment.html",
-        ),
+        # html.A(
+        #     html.Button("Download as HTML"),
+        #     id="download",
+        #     href="data:text/html;base64,",
+        #     download="enrollment.html",
+        # ),
     ]
 )
 
@@ -68,10 +62,9 @@ def update_output(list_of_contents, tab, list_of_names, list_of_dates):
         #     parse_contents(c, n, d)
         #     for c, n, d in zip(list_of_contents, list_of_names, list_of_dates)
         # ]
-        children = parse_contents(
+        children, CourseTitle = parse_contents(
             list_of_contents[0], tab, list_of_names[0], list_of_dates[0]
         )
-
         return children
 
 
@@ -86,7 +79,7 @@ def parse_contents(contents, tab, filename, date):
         f = decoded.decode(encoding="windows-1252")[24:].split("\n")
     elif filename.startswith("prereg"):
         f = decoded.decode(encoding="windows-1252")[25:].split("\n")
-    df = read_into_df(f=f, filename=filename)
+    df, CourseTitle, subTitle = read_into_df(f)
     # print(df)
     # print(tab)
     fig = enrollment_chart(df, dept_or_year=tab)
