@@ -5,9 +5,7 @@ import pandas as pd
 maps = json.load(open("maps.json"))
 
 
-def read_into_df(term="fall22", filename="classlst.xls", f=None):
-    list = "/Users/shenshen/Codes/3900/000admin/sheets/" + term + "/" + filename
-    has_reg = filename.startswith("classlst")
+def read_into_df(file):
 
     detail_major_list = []
     dept_list = []
@@ -50,9 +48,10 @@ def read_into_df(term="fall22", filename="classlst.xls", f=None):
                 json.dump(maps, f, indent=4, sort_keys=True)
             return new_s
 
-    CourseTitle = ""
-
     def process_f(f):
+        has_reg = False
+        print(type(f))
+        CourseTitle = ""
         for (idx, line) in enumerate(f):
             if idx == 2:
                 CourseTitle = line
@@ -68,7 +67,8 @@ def read_into_df(term="fall22", filename="classlst.xls", f=None):
             detail_major_list.append(detail_major)
             year_list.append(f"Year {fields[3][1]}")
             dept_list.append(group_majors(detail_major))
-            if has_reg:
+            if len(fields[4]) > 2:
+                has_reg = True
                 reg_or_can_list.append(maps["reg_can"][fields[4]])
         df = pd.DataFrame(
             dict(
@@ -77,23 +77,24 @@ def read_into_df(term="fall22", filename="classlst.xls", f=None):
                 year=year_list,
             )
         ).convert_dtypes()
+
         if has_reg:
             df["reg_status"] = reg_or_can_list
+        df["Department"] = df["dept"].map(
+            lambda x: maps["CourseNumber_to_Label"].get(str(x), x)
+        )
+        df.convert_dtypes()
         return df, CourseTitle
 
-    if f:
-        df, CourseTitle = process_f(f)
+    if type(file) is list:
+        df, CourseTitle = process_f(file)
     else:
-        with open(list) as f:
+        with open(file) as f:
             df, CourseTitle = process_f(f)
 
-    df["Department"] = df["dept"].map(
-        lambda x: maps["CourseNumber_to_Label"].get(str(x), x)
-    )
-    df.convert_dtypes()
-    df.to_csv(term + "_" + filename.split(".")[0] + ".csv")
-    df.to_csv(CourseTitle + ".csv")
-    return df
+    # df.to_csv(term + "_" + filename.split(".")[0] + ".csv")
+    # df.to_csv(CourseTitle + ".csv")
+    return df, CourseTitle
 
 
 def enrollment_chart(df, dept_or_year="dept"):
@@ -112,13 +113,16 @@ def enrollment_chart(df, dept_or_year="dept"):
         color_continuous_scale="RdBu",
     )
     fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
+    fig.update_layout(margin=dict(t=10, l=0, r=0, b=0))
     # print(fig.data[0])
     return fig
 
 
 if __name__ == "__main__":
-    # enrollment_chart("fall22", dept_or_year="dept", filename="classlst.xls")
-    # df = read_into_df("spring23", filename="prereg.xls")
-    df = read_into_df("fall22")
+    base = "/Users/shenshen/Codes/3900/000admin/sheets/"
+    term = "spring23"
+    filename = "prereg.xls"
+    file = base + term + "/" + filename
+    df, CourseTitle = read_into_df(file)
     fig = enrollment_chart(df)
     fig.show()
