@@ -49,12 +49,12 @@ def read_into_df(file):
             return new_s
 
     def process_f(f):
-        has_reg = False
-        # print(type(f))
-        CourseTitle = f[0]
-        subTitle = f[1]
-        for line in f:
-            if not line.startswith('"9'):
+        for (idx, line) in enumerate(f):
+            if idx == 0:
+                CourseTitle = line
+            elif idx == 1:
+                subTitle = line
+            elif not line.startswith('"9'):
                 continue
             fields = line.split("\t")
             if len(fields) <= 4:
@@ -67,7 +67,6 @@ def read_into_df(file):
             year_list.append(f"Year {fields[3][1]}")
             dept_list.append(group_majors(detail_major))
             if len(fields[4]) > 2:
-                has_reg = True
                 reg_or_can_list.append(maps["reg_can"][fields[4]])
         df = pd.DataFrame(
             dict(
@@ -77,23 +76,25 @@ def read_into_df(file):
             )
         ).convert_dtypes()
 
-        if has_reg:
+        if reg_or_can_list:
             df["reg_status"] = reg_or_can_list
         df["Department"] = df["dept"].map(
             lambda x: maps["CourseNumber_to_Label"].get(str(x), x)
         )
         df.convert_dtypes()
-        return df, CourseTitle
+        return df, CourseTitle, subTitle
 
     if type(file) is list:
-        df, CourseTitle = process_f(file)
+        df, CourseTitle, subTitle = process_f(file)
     else:
         with open(file) as f:
-            df, CourseTitle = process_f(f)
+            df, CourseTitle, subTitle = process_f(f)
 
     # df.to_csv(term + "_" + filename.split(".")[0] + ".csv")
     # df.to_csv(CourseTitle + ".csv")
-    return df, CourseTitle
+    print(CourseTitle)
+    print(subTitle)
+    return df, CourseTitle, subTitle
 
 
 def enrollment_chart(df, dept_or_year="dept"):
@@ -122,6 +123,6 @@ if __name__ == "__main__":
     term = "spring23"
     filename = "prereg.xls"
     file = base + term + "/" + filename
-    df, CourseTitle = read_into_df(file)
+    df, CourseTitle, subTitle = read_into_df(file)
     fig = enrollment_chart(df)
     fig.show()
