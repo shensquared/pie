@@ -50,11 +50,10 @@ def read_into_df(file):
 
     def process_f(f):
         has_reg = False
-        print(type(f))
-        CourseTitle = ""
-        for (idx, line) in enumerate(f):
-            if idx == 2:
-                CourseTitle = line
+        # print(type(f))
+        CourseTitle = f[0]
+        subTitle = f[1]
+        for line in f:
             if not line.startswith('"9'):
                 continue
             fields = line.split("\t")
