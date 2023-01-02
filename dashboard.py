@@ -1,4 +1,4 @@
-from dash import Dash, dcc, html, dash_table
+from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 import base64, datetime
 from enrollment_pie import data_and_chart
@@ -26,15 +26,18 @@ app.layout = html.Div(
             # Allow multiple files to be uploaded
             multiple=True,
         ),
-        dcc.Tabs(
-            id="tabs",
-            value="dept",
-            children=[
-                dcc.Tab(label="By Department", value="dept"),
-                dcc.Tab(label="By Year", value="year"),
-            ],
-        ),
+        dcc.Dropdown(["6.390", "6.101"], id="by"),
+        dcc.RadioItems(["dept", "year"], "dept", id="dept_or_year", inline=True),
+        # dcc.Tabs(
+        #     id="tabs",
+        #     value="dept",
+        #     children=[
+        #         dcc.Tab(label="By Department", value="dept"),
+        #         dcc.Tab(label="By Year", value="year"),
+        #     ],
+        # ),
         html.Div(id="tabs-content", style={"width": "100%"}),
+        dcc.Slider(min=0, max=20, step=5, value=10, id="my-slider")
         # html.A(
         #     html.Button("Download as HTML"),
         #     id="download",
@@ -48,40 +51,39 @@ app.layout = html.Div(
 @app.callback(
     Output("tabs-content", "children"),
     Input("upload-data", "contents"),
-    Input("tabs", "value"),
+    Input("dept_or_year", "value"),
     State("upload-data", "filename"),
     State("upload-data", "last_modified"),
 )
 def update_output(list_of_contents, tab, list_of_names, list_of_dates):
-    if list_of_contents is not None:
-        # children = [
-        #     parse_contents(c, n, d)
-        #     for c, n, d in zip(list_of_contents, list_of_names, list_of_dates)
-        # ]
-        children = parse_contents(
-            list_of_contents[0], tab, list_of_names[0], list_of_dates[0]
-        )
-        return children
+    if list_of_contents and len(list_of_contents) == 1:
+        children = [
+            parse_contents(c, tab, n, d)
+            for c, n, d in zip(list_of_contents, list_of_names, list_of_dates)
+        ]
+        return children[0]
+    else:
+        return html.H1("Multiple Course/Years Logic Not Implemented Yet")
 
 
 def parse_contents(contents, tab, filename, date):
-    if not filename.startswith("classlst") and not filename.startswith("prereg"):
-        return html.Div(
-            ["Can only process un-modified classlst or prereg list from the registrar."]
+    try:
+        decoded = base64.b64decode(contents)
+        if "classlst" in filename:
+            f = decoded.decode(encoding="windows-1252")[24:].split("\n")
+        elif "prereg" in filename:
+            f = decoded.decode(encoding="windows-1252")[25:].split("\n")
+        df, fig = data_and_chart(f, dept_or_year=tab)
+        # print(df)
+        # print(tab)
+        fig.write_html(buffer)
+        html_bytes = buffer.getvalue().encode()
+        encoded = base64.b64encode(html_bytes).decode()
+        return dcc.Graph(figure=fig, style={"height": "100%"})
+    except:
+        return html.H1(
+            "Failed to process the uploaded file. We can only process un-modified classlst or prereg list from the registrar."
         )
-    decoded = base64.b64decode(contents)
-
-    if filename.startswith("classlst"):
-        f = decoded.decode(encoding="windows-1252")[24:].split("\n")
-    elif filename.startswith("prereg"):
-        f = decoded.decode(encoding="windows-1252")[25:].split("\n")
-    df, fig = data_and_chart(f, dept_or_year=tab)
-    # print(df)
-    # print(tab)
-    fig.write_html(buffer)
-    html_bytes = buffer.getvalue().encode()
-    encoded = base64.b64encode(html_bytes).decode()
-    return dcc.Graph(figure=fig, style={"height": "100%"})
 
 
 if __name__ == "__main__":
