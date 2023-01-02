@@ -47,6 +47,7 @@ app.layout = html.Div(
         # ),
     ]
 )
+app.title = "Tim Enrollment Pie"
 
 
 @app.callback(
