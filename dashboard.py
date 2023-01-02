@@ -2,11 +2,12 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 import base64, datetime
 from enrollment_pie import data_and_chart
-import io
+import io, flask
 
 external_stylesheets = ["upstream.css"]
-external_stylesheets = []
-app = Dash(__name__, external_stylesheets=external_stylesheets)
+# external_stylesheets = []
+server = flask.Flask(__name__)
+app = Dash(__name__, external_stylesheets=external_stylesheets, server=server)
 buffer = io.StringIO()
 
 app.layout = html.Div(
