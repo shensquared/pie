@@ -49,8 +49,10 @@ def read_into_df(file):
             return new_s
 
     def process_f(f):
+        CourseTitle = ""
+        subTitle = ""
         for (idx, line) in enumerate(f):
-            if idx == 0:
+            if idx == 0 and (line.startswith("SP") or line.startswith("FA")):
                 CourseTitle = line
             elif idx == 1:
                 subTitle = line
@@ -74,14 +76,14 @@ def read_into_df(file):
                 dept=dept_list,
                 year=year_list,
             )
-        ).convert_dtypes()
+        )
 
         if reg_or_can_list:
             df["reg_status"] = reg_or_can_list
         df["Department"] = df["dept"].map(
             lambda x: maps["CourseNumber_to_Label"].get(str(x), x)
         )
-        df.convert_dtypes()
+        # df.convert_dtypes
         return df, CourseTitle, subTitle
 
     if type(file) is list:
@@ -92,8 +94,8 @@ def read_into_df(file):
 
     # df.to_csv(term + "_" + filename.split(".")[0] + ".csv")
     # df.to_csv(CourseTitle + ".csv")
-    print(CourseTitle)
-    print(subTitle)
+    # print(CourseTitle)
+    # print(subTitle)
     return df, CourseTitle, subTitle
 
 
@@ -130,6 +132,7 @@ if __name__ == "__main__":
     term = "spring23"
     filename = "prereg.xls"
     file = base + term + "/" + filename
-    df, CourseTitle, subTitle = read_into_df(file)
-    fig = enrollment_chart(df, CourseTitle)
+    # df, CourseTitle, subTitle = read_into_df(file)
+    # fig = enrollment_chart(df, CourseTitle)
+    df, fig = data_and_chart(file)
     fig.show()
