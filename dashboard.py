@@ -6,7 +6,7 @@ import io, flask, json
 
 div_paras = json.load(open("div.json"))
 
-external_stylesheets = ["upstream.css"]
+external_stylesheets = ["assets/upstream.css"]
 # external_stylesheets = []
 server = flask.Flask(__name__)
 app = Dash(__name__, external_stylesheets=external_stylesheets, server=server)
