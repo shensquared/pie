@@ -1,0 +1,5 @@
+sudo nano /etc/systemd/system/dashboard.service
+then the unicorn thingy
+sudo systemctl enable dashboard
+
+sudo systemctl status dashboard
