@@ -1,7 +1,7 @@
 from dash import Dash, dcc, html, dash_table
 from dash.dependencies import Input, Output, State
 import base64, datetime
-from enrollment_pie import read_into_df, enrollment_chart
+from enrollment_pie import data_and_chart
 import io
 
 external_stylesheets = ["upstream.css"]
@@ -25,10 +25,6 @@ app.layout = html.Div(
             },
             # Allow multiple files to be uploaded
             multiple=True,
-        ),
-        html.H1(
-            "hhh",
-            id="title",
         ),
         dcc.Tabs(
             id="tabs",
@@ -62,7 +58,7 @@ def update_output(list_of_contents, tab, list_of_names, list_of_dates):
         #     parse_contents(c, n, d)
         #     for c, n, d in zip(list_of_contents, list_of_names, list_of_dates)
         # ]
-        children, CourseTitle = parse_contents(
+        children = parse_contents(
             list_of_contents[0], tab, list_of_names[0], list_of_dates[0]
         )
         return children
@@ -79,10 +75,9 @@ def parse_contents(contents, tab, filename, date):
         f = decoded.decode(encoding="windows-1252")[24:].split("\n")
     elif filename.startswith("prereg"):
         f = decoded.decode(encoding="windows-1252")[25:].split("\n")
-    df, CourseTitle, subTitle = read_into_df(f)
+    df, fig = data_and_chart(f, dept_or_year=tab)
     # print(df)
     # print(tab)
-    fig = enrollment_chart(df, dept_or_year=tab)
     fig.write_html(buffer)
     html_bytes = buffer.getvalue().encode()
     encoded = base64.b64encode(html_bytes).decode()

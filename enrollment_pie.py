@@ -97,7 +97,7 @@ def read_into_df(file):
     return df, CourseTitle, subTitle
 
 
-def enrollment_chart(df, dept_or_year="dept"):
+def enrollment_chart(df, CourseTitle="", dept_or_year="dept"):
     if dept_or_year == "dept":
         path = ["reg_status", "dept", "major"]
     elif dept_or_year == "year":
@@ -113,9 +113,16 @@ def enrollment_chart(df, dept_or_year="dept"):
         color_continuous_scale="RdBu",
     )
     fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
-    fig.update_layout(margin=dict(t=10, l=0, r=0, b=0))
+    fig.update_layout(title=CourseTitle)
+    fig.update_layout(margin=dict(t=50, l=0, r=0, b=0))
     # print(fig.data[0])
     return fig
+
+
+def data_and_chart(f, dept_or_year="dept"):
+    df, CourseTitle, subTitle = read_into_df(f)
+    fig = enrollment_chart(df, CourseTitle=CourseTitle, dept_or_year=dept_or_year)
+    return df, fig
 
 
 if __name__ == "__main__":
@@ -124,5 +131,5 @@ if __name__ == "__main__":
     filename = "prereg.xls"
     file = base + term + "/" + filename
     df, CourseTitle, subTitle = read_into_df(file)
-    fig = enrollment_chart(df)
+    fig = enrollment_chart(df, CourseTitle)
     fig.show()
