@@ -123,14 +123,15 @@ app.title = "Tim Enrollment Pie"
     State("upload-data", "last_modified"),
 )
 def update_output(list_of_contents, tab, list_of_names, list_of_dates):
-    if list_of_contents and len(list_of_contents) == 1:
-        children = [
-            parse_contents(c, tab, n, d)
-            for c, n, d in zip(list_of_contents, list_of_names, list_of_dates)
-        ]
-        return children[0]
-    else:
-        return html.H1("Multiple Course/Years Logic Not Implemented Yet")
+    if list_of_contents:
+        if len(list_of_contents) == 1:
+            children = [
+                parse_contents(c, tab, n, d)
+                for c, n, d in zip(list_of_contents, list_of_names, list_of_dates)
+            ]
+            return children[0]
+        else:
+            return html.H1("Multiple Course/Years Logic Not Implemented Yet")
 
 
 def parse_contents(contents, tab, filename, date):
