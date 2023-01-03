@@ -1,4 +1,4 @@
-from dash import Dash, dcc, html
+from dash import Dash, dcc, html, no_update
 from dash.dependencies import Input, Output, State
 import base64, datetime
 from enrollment_pie import data_and_chart
@@ -40,15 +40,16 @@ app.layout = html.Div(
 
 @app.callback(
     Output("real_pie", "children"),
+    Output("upload-data", "style"),
     Input("demo", "n_clicks"),
     Input("upload-data", "contents"),
 )
 def upload_or_example(n_clicks, list_of_contents):
     if list_of_contents:
-        return uploaded_chart
+        return (uploaded_chart, {"display": "none"})
     elif n_clicks and n_clicks > 0:
-        return example_chart
-    return demo_banner_block
+        return example_chart, no_update
+    return demo_banner_block, no_update
 
 
 @app.callback(
