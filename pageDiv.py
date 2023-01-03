@@ -87,9 +87,8 @@ demo_banner_block = dbc.Row(
         html.Br(),
         html.Br(),
         html.Br(),
-        html.Br(),
     ],
-    className="align-items",
+    align="center",
     id="demo_banner",
 )
 
