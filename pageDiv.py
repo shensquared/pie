@@ -114,7 +114,7 @@ pie_controls = html.Center(
             [
                 "Select a demo course",
                 dcc.Dropdown(
-                    list(div_paras.keys())[:-1], value="Demo", id="courseNumber"
+                    list(div_paras.keys())[:-1], value="6.390", id="courseNumber"
                 ),
             ],
             # style={"width": "15%", "float": "left"},
@@ -128,7 +128,7 @@ pie_controls = html.Center(
                 "Semester",
                 dcc.Slider(
                     step=1,
-                    value=0,
+                    value=1,
                     id="semesterSlider",
                     marks=None,
                 ),
