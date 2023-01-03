@@ -38,18 +38,9 @@ upload_block = html.Center(
                 dcc.Markdown(
                     [
                         """ ###### Support `classlst.xls` and `prereg.xls`.""",
-                        """###### Drag/Drop sheets into the box, or click the box to select files""",
-                        """Uploaded is stored **only** in your current browser session; i.e., it evaporates once the tab is refreshed.""",
+                        """###### Drag/Drop sheets into this box, or click this box to select files""",
+                        """Uploaded is stored **only** in your current browser session; i.e., it evaporates 👻 once the tab is refreshed.""",
                     ],
-                    # style={
-                    #     "width": "90%",
-                    #     "lineHeight": "30px",
-                    #     "borderWidth": "1.5px",
-                    #     "borderStyle": "dashed",
-                    #     "borderRadius": "15px",
-                    #     "textAlign": "center",
-                    #     "margin": "auto",
-                    # },
                 ),
                 html.Br(),
                 html.Br(),
