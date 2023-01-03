@@ -5,45 +5,34 @@ div_paras = json.load(open("div.json"))
 
 logo_style = {
     "height": "77%",
-    "float": "left",
-    "padding-left": "20px",
-    "padding-top": "0px",
-    "padding-right": "30px",
+    # "float": "left",
+    # "padding-left": "20px",
+    # "padding-top": "0px",
+    # "padding-right": "30px",
 }
-tim_banner = html.Div(
+tim_banner = html.Center(
     [
         html.Img(src="assets/widetim.png", style=logo_style),
         html.Div(
             [
-                dcc.Markdown("""### ❤️ Feed Wide Tim Some Pie 🥧"""),
+                dcc.Markdown("""### ❤️ Make Wide Tim Some Pie 🥧"""),
                 dcc.Markdown("""##### with the registrar enrollment sheets..."""),
-                # html.Div(
-                #     [
-                #         "Drag and Drop or ",
-                #         html.A("Select Files"),
-                #     ],
-                #     style={
-                #         "width": "90%",
-                #         "lineHeight": "30px",
-                #         "borderWidth": "1.5px",
-                #         "borderStyle": "dashed",
-                #         "borderRadius": "15px",
-                #         "textAlign": "center",
-                #         "margin": "20px",
-                #         "padding-left": "77px",
-                #     },
-                # ),
-            ]
+            ],
+            style={
+                # "float": "left",
+                "textAlign": "center",
+            },
         ),
     ],
     style={
-        "width": "90%",
-        "lineHeight": "20px",
-        "height": "139px",
-        "float": "right",
-        # "textAlign": "center",
+        "height": "137px",
+        "verticalAlign": "top",
+        "textAlign": "center",
+        "display": "flex",
+        "flexDirection": "row",
+        "width": "30%",
         "margin": "auto",
-        # "padding-left": "77px",
+        "float": "center",
     },
 )
 
@@ -56,8 +45,8 @@ upload_block = dcc.Upload(
             ),
             "Drag/Drop Sheets, or ",
             html.A("Select Files"),
-            ", or ",
-            html.Button("demo"),
+            # ", or ",
+            # html.Button("demo"),
         ],
         style={
             "width": "90%",
@@ -84,6 +73,15 @@ upload_block = dcc.Upload(
         "flexDirection": "row",
     },
 )
+
+demo_banner_block = html.Center(
+    [
+        "Or, get a taste of the pie without uploading your own sheet...",
+        html.Button("see an example", id="demo", style={"margin-left": "20px"}),
+    ],
+    id="demo_banner",
+)
+
 pie_controls = html.Div(
     [
         html.Div(
