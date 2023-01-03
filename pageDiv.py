@@ -15,10 +15,8 @@ tim_banner = html.Div(
         html.Img(src="assets/widetim.png", style=logo_style),
         html.Div(
             [
-                dcc.Markdown("""### Feed Wide Tim A Pie..."""),
-                dcc.Markdown(
-                    """##### with an un-modified registrar `classlst.xls` or `prereg.xls` sheet"""
-                ),
+                dcc.Markdown("""### ❤️ Feed Wide Tim Some Pie 🥧"""),
+                dcc.Markdown("""##### with the registrar enrollment sheets..."""),
                 # html.Div(
                 #     [
                 #         "Drag and Drop or ",
@@ -53,11 +51,11 @@ upload_block = dcc.Upload(
     id="upload-data",
     children=html.Div(
         [
+            dcc.Markdown(
+                """(Support both `classlst.xls` and `prereg.xls`. Uploaded data is stored in your current browser session **only** and does not stay on the server.)"""
+            ),
             "Drag and Drop or ",
             html.A("Select Files"),
-            dcc.Markdown(
-                """(the sheet data is stored in your current browser session only; that is, no sheet info is stored on the server.)"""
-            ),
         ],
         style={
             "width": "90%",
@@ -103,6 +101,7 @@ pie_controls = html.Div(
                 dcc.Slider(
                     min=0,
                     max=4,
+                    step=1,
                     value=0,
                     id="semesterSlider",
                 ),
