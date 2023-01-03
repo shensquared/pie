@@ -138,4 +138,5 @@ pie_controls = html.Div(
         "width": "77%",
         "margin": "auto",
     },
+    id="courseTermController",
 )
