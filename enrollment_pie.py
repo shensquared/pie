@@ -95,6 +95,7 @@ def read_into_df(file):
     # df.to_csv(term + "_" + filename.split(".")[0] + ".csv")
     # df.to_csv(CourseTitle + ".csv")
     # print(CourseTitle)
+    # print(CourseTitle.split(" "))
     # print(subTitle)
     return df, CourseTitle, subTitle
 
@@ -115,8 +116,17 @@ def enrollment_chart(df, CourseTitle="", dept_or_year="dept"):
         color_continuous_scale="RdBu",
     )
     fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
-    fig.update_layout(title=CourseTitle)
-    fig.update_layout(margin=dict(t=50, l=0, r=0, b=0))
+    fig.update_layout(margin=dict(t=70, l=0, r=0, b=0))
+    fig.update_layout(
+        title={
+            "text": CourseTitle,
+            "y": 0.9,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+        }
+    )
+
     # print(fig.data[0])
     return fig
 
