@@ -38,7 +38,7 @@ upload_block = html.Center(
                     [
                         """ ###### Support `classlst.xls` and `prereg.xls`.""",
                         """###### Drag/Drop sheets into this box, or click this box to select files""",
-                        """Uploaded is stored **only** in your current browser session; i.e., it evaporates 👻 once the tab is refreshed.""",
+                        """Uploaded sheet/data is stored **only** in your current browser session; i.e., it evaporates 👻 once your tab is refreshed.""",
                     ],
                 ),
                 html.Br(),
