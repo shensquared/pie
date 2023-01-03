@@ -70,6 +70,8 @@ def read_into_df(file):
             dept_list.append(group_majors(detail_major))
             if len(fields[4]) > 2:
                 reg_or_can_list.append(maps["reg_can"][fields[4]])
+            else:
+                reg_or_can_list.append("Pre-registered")
         df = pd.DataFrame(
             dict(
                 major=detail_major_list,
