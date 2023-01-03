@@ -23,7 +23,6 @@ app.layout = html.Div(
     [
         tim_banner,
         upload_block,
-        html.Br(),
         html.Div(
             [demo_banner_block],
             id="real_pie",
@@ -51,9 +50,9 @@ def upload_or_example(n_clicks, list_of_contents):
     elif n_clicks and n_clicks > 0:
         return (
             example_chart,
-            no_update,
+            {"display": "none"},
         )
-    return demo_banner_block, no_update
+    return [html.Br(), html.Br(), demo_banner_block], no_update
 
 
 @app.callback(
@@ -100,13 +99,13 @@ def parse_contents(contents, tab, filename, date):
         )
 
 
-@app.callback(
-    Output("tim", "src"),
-    Input("example_pie", "children"),
-    Input("upload_pie", "children"),
-)
-def update_tim(a, b):
-    return "assets/long_tim.png"
+# @app.callback(
+#     Output("tim", "src"),
+#     State("upload-data", "last_modified"),
+#     Input("upload_pie", "children"),
+# )
+# def update_tim(a, b):
+#     return "assets/long_tim.png"
 
 
 @app.callback(
