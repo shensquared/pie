@@ -148,7 +148,7 @@ def update_semesters(course):
     Input("dept_or_year_example", "value"),
 )
 def show_example(course, value, marks, deptYear):
-    print(marks)
+    # print(marks)
     term = marks[str(value)]
     base = "data/" + course + "/" + term
     f = base + "/classlst.xls"
