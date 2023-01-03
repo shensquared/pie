@@ -53,12 +53,12 @@ def upload_or_example(n_clicks, list_of_contents):
 
 @app.callback(
     Output("uploaded_pie", "children"),
-    Input("upload-data", "contents"),
     Input("dept_or_year_upload", "value"),
+    State("upload-data", "contents"),
     State("upload-data", "filename"),
     State("upload-data", "last_modified"),
 )
-def update_output(list_of_contents, tab, list_of_names, list_of_dates):
+def update_output(tab, list_of_contents, list_of_names, list_of_dates):
     if list_of_contents:
         if len(list_of_contents) == 1:
             children = [
