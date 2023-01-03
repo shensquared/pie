@@ -37,6 +37,13 @@ app.layout = dbc.Container(
             id="real_pie",
             style={"width": "100%", "margin": "auto"},
         ),
+        html.Br(),
+        html.Footer(
+            dcc.Markdown(
+                "[Bug report/feature request](https://github.com/shensquared/timPie)"
+            ),
+            style={"float": "right"},
+        )
         # html.A(
         #     html.Button("Download as HTML"),
         #     id="download",

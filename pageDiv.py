@@ -76,9 +76,7 @@ demo_banner_block = dbc.Row(
             width={"size": 3, "offset": 3, "order": "first"},
         ),
         dbc.Col(
-            dcc.Markdown(
-                """feel free to click/hover around. [Bug report/feature request](https://github.com/shensquared/timPie)"""
-            ),
+            dcc.Markdown("""feel free to click/hover around. """),
             width={
                 "size": 3,
             },
