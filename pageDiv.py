@@ -69,17 +69,18 @@ demo_banner_block = dbc.Row(
         dbc.Col(
             dbc.Button(
                 "A taste of some (half-baked) pie",
-                outline=True,
-                color="secondary",
+                color="primary",
                 className="me-1",
                 id="demo",
             ),
             width={"size": 3, "offset": 3, "order": "first"},
         ),
         dbc.Col(
-            dcc.Markdown("""feel free to click/hover around..."""),
+            dcc.Markdown(
+                """feel free to click/hover around. [Bug report/feature request](https://github.com/shensquared/timPie)"""
+            ),
             width={
-                "size": 4,
+                "size": 3,
             },
         ),
         html.Br(),
@@ -182,6 +183,7 @@ uploaded_chart = html.Div(
             html.H3("", id="upload_title"),
         ),
         dbc.Col(html.Center(dept_or_year_upload)),
+        html.Br(),
         dbc.Col(
             html.Div(
                 id="uploaded_pie",
