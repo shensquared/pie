@@ -2,6 +2,7 @@ from dash import html, dcc
 import json
 
 div_paras = json.load(open("div.json"))
+
 logo_style = {
     "height": "77%",
     "float": "left",
@@ -87,9 +88,26 @@ pie_controls = html.Div(
         html.Div(
             [
                 "Select a demo course",
-                dcc.Dropdown(div_paras["CourseList"], value="Demo", id="courseNumber"),
+                dcc.Dropdown(
+                    list(div_paras.keys())[:-1], value="Demo", id="courseNumber"
+                ),
             ],
-            style={"width": "30%", "float": "left"},
+            style={"width": "28%", "float": "left"},
+        ),
+        html.Div(
+            style={"width": "10%", "float": "left"},
+        ),
+        html.Div(
+            [
+                "Semester",
+                dcc.Slider(
+                    min=0,
+                    max=4,
+                    value=0,
+                    id="semesterSlider",
+                ),
+            ],
+            style={"width": "33%", "float": "left"},
         ),
         html.Div(
             style={"width": "10%", "float": "left"},
@@ -109,28 +127,13 @@ pie_controls = html.Div(
                     style={"padding-top": "10px"},
                 ),
             ],
-            style={"width": "30%", "float": "left"},
-        ),
-        html.Div(
-            style={"width": "10%", "float": "left"},
-        ),
-        html.Div(
-            [
-                "Semester",
-                dcc.Slider(
-                    min=0,
-                    max=4,
-                    value=0,
-                    id="semesterSlider",
-                ),
-            ],
-            style={"width": "30%", "float": "left"},
+            style={"float": "left"},
         ),
     ],
     style={
         "display": "flex",
         "flexDirection": "row",
-        "width": "70%",
+        "width": "77%",
         "margin": "auto",
     },
 )
