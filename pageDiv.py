@@ -88,7 +88,7 @@ dept_or_year_upload = html.Div(
             id="dept_or_year_upload",
             inline=True,
             # labelStyle={"display": "block"},
-            style={"paddingTop": "10px"},
+            # style={"paddingTop": "10px"},
         ),
     ],
 )
@@ -162,7 +162,7 @@ example_chart = html.Div(
 
 uploaded_chart = html.Div(
     [
-        dept_or_year_upload,
+        html.Center(dept_or_year_upload),
         html.Div(
             id="uploaded_pie",
             style={"width": "100%"},

@@ -55,6 +55,7 @@ def upload_or_example(n_clicks, list_of_contents):
 @app.callback(
     Output("uploaded_pie", "children"),
     Output("topBanner", "children"),
+    Output("tim", "src"),
     Input("dept_or_year_upload", "value"),
     State("upload-data", "contents"),
     State("upload-data", "filename"),
@@ -88,11 +89,13 @@ def parse_contents(contents, tab, filename, date):
         return (
             dcc.Graph(figure=fig, style={"height": "100%"}),
             "### " + title,
+            "assets/long_tim.png",
         )
     except:
         return (
             no_update,
             "Failed to process the uploaded file. We can only process un-modified `classlst` or `prereg` list from the registrar.",
+            no_update,
         )
 
 
