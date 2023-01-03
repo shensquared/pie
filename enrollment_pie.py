@@ -111,11 +111,11 @@ def enrollment_chart(df, CourseTitle="", dept_or_year="dept"):
         df,
         path=path,
         color="major",
-        # hover_name="Department",
+        hover_name="Department",
         hover_data=["major"],
         color_continuous_scale="RdBu",
     )
-    fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
+    # fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
     fig.update_layout(margin=dict(t=70, l=0, r=0, b=0))
     fig.update_layout(
         title={
