@@ -74,7 +74,7 @@ upload_block = dcc.Upload(
 demo_banner_block = html.Center(
     [
         "Or, get a taste of the pie without uploading your own sheet...",
-        html.Button("see an example", id="demo", style={"marginLeft": "20px"}),
+        html.Button("see half-baked example", id="demo", style={"marginLeft": "20px"}),
     ],
     id="demo_banner",
 )
