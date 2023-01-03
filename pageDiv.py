@@ -4,31 +4,33 @@ import json
 div_paras = json.load(open("div.json"))
 
 logo_style = {
-    "height": "77%",
+    "height": "100px",
 }
 tim_banner = html.Center(
     [
         html.Img(src="assets/widetim.png", style=logo_style),
         html.Div(
             [
-                dcc.Markdown("""### ❤️ Make Wide Tim Some Pie 🥧"""),
-                dcc.Markdown("""##### with the registrar enrollment sheets..."""),
+                dcc.Markdown(
+                    """### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets..."""
+                ),
+                # dcc.Markdown("""##### with the registrar enrollment sheets..."""),
             ],
-            style={
-                # "float": "left",
-                "textAlign": "center",
-            },
+            # style={
+            #     # "float": "left",
+            #     # "textAlign": "center",
+            # },
         ),
     ],
     style={
-        "height": "137px",
-        "verticalAlign": "top",
-        "textAlign": "center",
-        "display": "flex",
-        "flexDirection": "row",
-        "width": "30%",
-        "margin": "auto",
-        "float": "center",
+        # "height": "137px",
+        # "verticalAlign": "top",
+        # "textAlign": "center",
+        # "display": "flex",
+        # "flexDirection": "row",
+        # "width": "30%",
+        # "margin": "auto",
+        # "float": "center",
     },
 )
 
@@ -37,9 +39,9 @@ upload_block = dcc.Upload(
     children=html.Div(
         [
             dcc.Markdown(
-                """(Support both `classlst.xls` and `prereg.xls`. Uploaded data is stored in your current browser session **only** and does not stay on the server.)"""
+                """(Support both `classlst.xls` and `prereg.xls`. Uploaded data is **only** stored in your current browser session; it does not stay on the server.)"""
             ),
-            "Drag/Drop Sheets or ",
+            "Drag/Drop the sheets or ",
             html.A("Select Files"),
         ],
         style={
@@ -166,4 +168,5 @@ uploaded_chart = html.Div(
         ),
     ],
     id="uploaded_chart",
+    # style={"display": "flex", "flex-direction": "row"},
 )
