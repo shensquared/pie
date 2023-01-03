@@ -50,23 +50,32 @@ app.layout = dbc.Container(
 @app.callback(
     Output("real_pie", "children"),
     Output("upload-data", "style"),
+    Output("make_banner", "style"),
+    Output("demo_banner", "style"),
     Input("demo", "n_clicks"),
     Input("upload-data", "contents"),
 )
 def upload_or_example(n_clicks, list_of_contents):
     if list_of_contents:
-        return (uploaded_chart, {"display": "none"})
+        return (
+            uploaded_chart,
+            {"display": "none"},
+            {"display": "none"},
+            {"display": "none"},
+        )
     elif n_clicks and n_clicks > 0:
         return (
             example_chart,
             {"display": "none"},
+            {"display": "none"},
+            {"display": "none"},
         )
-    return [], no_update
+    return [], no_update, no_update, no_update
 
 
 @app.callback(
     Output("uploaded_pie", "children"),
-    Output("topBanner", "children"),
+    Output("upload_title", "children"),
     Input("dept_or_year_upload", "value"),
     State("upload-data", "contents"),
     State("upload-data", "filename"),
@@ -99,7 +108,7 @@ def parse_contents(contents, tab, filename, date):
         # encoded = base64.b64encode(html_bytes).decode()
         return (
             dcc.Graph(figure=fig, style={"height": "100%"}),
-            "### " + title,
+            title,
         )
     except:
         return (
@@ -150,6 +159,7 @@ def update_semesters(course):
 
 @app.callback(
     Output("example_pie", "children"),
+    Output("example_title", "children"),
     Input("courseNumber", "value"),
     Input("semesterSlider", "value"),
     Input("semesterSlider", "marks"),
@@ -159,14 +169,17 @@ def show_example(course, value, marks, deptYear):
     # print(marks)
     try:
         term = marks[str(value)]
+    except:
+        term = marks["0"]
+    try:
         base = "data/" + course + "/" + term
         f = base + "/classlst.xls"
         if term == "spring23":
             f = base + "/prereg.xls"
         df, fig, title = data_and_chart(f, dept_or_year=deptYear)
-        return (dcc.Graph(figure=fig, style={"height": "100%"}),)
+        return (dcc.Graph(figure=fig, style={"height": "100%"}), title)
     except:
-        return html.Center(html.H1("An error occurred"))
+        return None, "An error occurred"
 
 
 if __name__ == "__main__":

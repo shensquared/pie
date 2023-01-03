@@ -14,14 +14,13 @@ tim_banner = html.Center(
                 dbc.Col(
                     dcc.Markdown(
                         """#### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets...""",
-                        id="topBanner",
                     ),
                     width=11,
                 ),
             ],
-            justify="center",
         ),
     ],
+    id="make_banner",
 )
 
 upload_block = html.Center(
@@ -164,6 +163,10 @@ pie_controls = dbc.Row(
 
 example_chart = html.Div(
     [
+        html.Br(),
+        html.Center(
+            html.H3("", id="example_title"),
+        ),
         pie_controls,
         html.Br(),
         html.Div(
@@ -176,7 +179,7 @@ example_chart = html.Div(
 uploaded_chart = html.Div(
     [
         html.Center(
-            dcc.Markdown("daisd"),
+            html.H3("", id="upload_title"),
         ),
         dbc.Col(html.Center(dept_or_year_upload)),
         dbc.Col(
