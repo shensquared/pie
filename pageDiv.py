@@ -5,10 +5,6 @@ div_paras = json.load(open("div.json"))
 
 logo_style = {
     "height": "77%",
-    # "float": "left",
-    # "padding-left": "20px",
-    # "padding-top": "0px",
-    # "padding-right": "30px",
 }
 tim_banner = html.Center(
     [
@@ -43,10 +39,8 @@ upload_block = dcc.Upload(
             dcc.Markdown(
                 """(Support both `classlst.xls` and `prereg.xls`. Uploaded data is stored in your current browser session **only** and does not stay on the server.)"""
             ),
-            "Drag/Drop Sheets, or ",
+            "Drag/Drop Sheets or ",
             html.A("Select Files"),
-            # ", or ",
-            # html.Button("demo"),
         ],
         style={
             "width": "90%",
@@ -56,8 +50,8 @@ upload_block = dcc.Upload(
             # "borderRadius": "15px",
             "textAlign": "center",
             "margin": "auto",
-            "padding-top": "20px",
-            "padding-bottom": "20px",
+            "paddingTop": "20px",
+            "paddingBottom": "20px",
         },
     ),
     multiple=True,
@@ -77,10 +71,40 @@ upload_block = dcc.Upload(
 demo_banner_block = html.Center(
     [
         "Or, get a taste of the pie without uploading your own sheet...",
-        html.Button("see an example", id="demo", style={"margin-left": "20px"}),
+        html.Button("see an example", id="demo", style={"marginLeft": "20px"}),
     ],
     id="demo_banner",
 )
+
+dept_or_year_upload = html.Div(
+    [
+        "Slice the last pie by",
+        dcc.RadioItems(
+            ["dept", "year"],
+            value="dept",
+            id="dept_or_year_upload",
+            inline=True,
+            # labelStyle={"display": "block"},
+            style={"paddingTop": "10px"},
+        ),
+    ],
+)
+
+dept_or_year_example = html.Div(
+    [
+        "Slice the last pie by",
+        dcc.RadioItems(
+            ["dept", "year"],
+            value="dept",
+            id="dept_or_year_example",
+            inline=True,
+            # labelStyle={"display": "block"},
+            style={"paddingTop": "10px"},
+        ),
+    ],
+    style={"float": "left"},
+)
+
 
 pie_controls = html.Div(
     [
@@ -112,23 +136,7 @@ pie_controls = html.Div(
         html.Div(
             style={"width": "10%", "float": "left"},
         ),
-        html.Div(
-            [
-                "Slice the last pie by",
-                dcc.RadioItems(
-                    options=[
-                        dict(label="by dept", value="dept"),
-                        dict(label="by class year", value="year"),
-                    ],
-                    value="dept",
-                    id="dept_or_year",
-                    inline=True,
-                    # labelStyle={"display": "block"},
-                    style={"padding-top": "10px"},
-                ),
-            ],
-            style={"float": "left"},
-        ),
+        dept_or_year_example,
     ],
     style={
         "display": "flex",
@@ -137,4 +145,25 @@ pie_controls = html.Div(
         "margin": "auto",
     },
     id="courseTermController",
+)
+
+example_chart = html.Div(
+    [
+        pie_controls,
+        html.Div(
+            id="example_pies",
+            style={"width": "100%", "margin": "auto"},
+        ),
+    ]
+)
+
+uploaded_chart = html.Div(
+    [
+        dept_or_year_upload,
+        html.Div(
+            id="uploaded_pie",
+            style={"width": "100%"},
+        ),
+    ],
+    id="uploaded_chart",
 )
