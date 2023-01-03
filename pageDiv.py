@@ -8,11 +8,12 @@ logo_style = {
 }
 tim_banner = html.Center(
     [
-        html.Img(src="assets/widetim.png", style=logo_style),
+        html.Img(src="assets/widetim.png", style=logo_style, id="tim"),
         html.Div(
             [
                 dcc.Markdown(
-                    """### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets..."""
+                    """### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets...""",
+                    id="topBanner",
                 ),
                 # dcc.Markdown("""##### with the registrar enrollment sheets..."""),
             ],

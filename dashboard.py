@@ -54,6 +54,7 @@ def upload_or_example(n_clicks, list_of_contents):
 
 @app.callback(
     Output("uploaded_pie", "children"),
+    Output("topBanner", "children"),
     Input("dept_or_year_upload", "value"),
     State("upload-data", "contents"),
     State("upload-data", "filename"),
@@ -78,16 +79,20 @@ def parse_contents(contents, tab, filename, date):
             f = decoded.decode(encoding="windows-1252")[24:].split("\n")
         elif "prereg" in filename:
             f = decoded.decode(encoding="windows-1252")[25:].split("\n")
-        df, fig = data_and_chart(f, dept_or_year=tab)
+        df, fig, title = data_and_chart(f, dept_or_year=tab)
         # print(df)
         # print(tab)
         # fig.write_html(buffer)
         # html_bytes = buffer.getvalue().encode()
         # encoded = base64.b64encode(html_bytes).decode()
-        return dcc.Graph(figure=fig, style={"height": "100%"})
+        return (
+            dcc.Graph(figure=fig, style={"height": "100%"}),
+            "### " + title,
+        )
     except:
-        return dcc.Markdown(
-            "Failed to process the uploaded file. We can only process un-modified `classlst` or `prereg` list from the registrar."
+        return (
+            no_update,
+            "Failed to process the uploaded file. We can only process un-modified `classlst` or `prereg` list from the registrar.",
         )
 
 
