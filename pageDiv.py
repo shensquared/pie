@@ -1,0 +1,135 @@
+from dash import html, dcc
+import json
+
+div_paras = json.load(open("div.json"))
+logo_style = {
+    "height": "77%",
+    "float": "left",
+    "padding-left": "20px",
+    "padding-top": "0px",
+    "padding-right": "30px",
+}
+tim_banner = html.Div(
+    [
+        html.Img(src="assets/widetim.png", style=logo_style),
+        html.Div(
+            [
+                dcc.Markdown("""### Feed Wide Tim A Pie..."""),
+                dcc.Markdown(
+                    """#### with an un-modified registrar `classlst.xls` or `prereg.xls` sheet"""
+                ),
+                # html.Div(
+                #     [
+                #         "Drag and Drop or ",
+                #         html.A("Select Files"),
+                #     ],
+                #     style={
+                #         "width": "90%",
+                #         "lineHeight": "30px",
+                #         "borderWidth": "1.5px",
+                #         "borderStyle": "dashed",
+                #         "borderRadius": "15px",
+                #         "textAlign": "center",
+                #         "margin": "20px",
+                #         "padding-left": "77px",
+                #     },
+                # ),
+            ]
+        ),
+    ],
+    style={
+        "width": "90%",
+        "lineHeight": "30px",
+        "height": "150px",
+        "float": "right",
+        # "textAlign": "center",
+        "margin": "auto",
+        # "padding-left": "77px",
+    },
+)
+
+upload_block = dcc.Upload(
+    id="upload-data",
+    children=html.Div(
+        [
+            "Drag and Drop or ",
+            html.A("Select Files"),
+            dcc.Markdown(
+                """(the sheet data is stored in your current browser session only; that is, no sheet info is stored on the server.)"""
+            ),
+        ],
+        style={
+            "width": "90%",
+            "lineHeight": "30px",
+            # "borderWidth": "1.5px",
+            # "borderStyle": "dashed",
+            # "borderRadius": "15px",
+            "textAlign": "center",
+            "margin": "auto",
+            "padding-top": "20px",
+        },
+    ),
+    multiple=True,
+    style={
+        "width": "77%",
+        "lineHeight": "30px",
+        "borderWidth": "1.5px",
+        "borderStyle": "dashed",
+        "borderRadius": "15px",
+        "textAlign": "center",
+        "margin": "auto",
+        "display": "flex",
+        "flexDirection": "row",
+    },
+)
+pie_controls = html.Div(
+    [
+        html.Div(
+            [
+                "Select a demo course",
+                dcc.Dropdown(div_paras["CourseList"], value="Demo", id="by"),
+            ],
+            style={"width": "30%", "float": "left"},
+        ),
+        html.Div(
+            style={"width": "10%", "float": "left"},
+        ),
+        html.Div(
+            [
+                dcc.RadioItems(
+                    options=[
+                        dict(label="Detail by dept", value="dept"),
+                        dict(label="Detail by class year", value="year"),
+                    ],
+                    value="dept",
+                    id="dept_or_year",
+                    inline=False,
+                    labelStyle={"display": "block"},
+                ),
+            ],
+            style={"width": "30%", "float": "left"},
+        ),
+        html.Div(
+            style={"width": "10%", "float": "left"},
+        ),
+        html.Div(
+            [
+                "Year",
+                dcc.Slider(
+                    min=0,
+                    max=20,
+                    step=5,
+                    value=10,
+                    id="my-slider",
+                ),
+            ],
+            style={"width": "30%", "float": "left"},
+        ),
+    ],
+    style={
+        "display": "flex",
+        "flexDirection": "row",
+        "width": "70%",
+        "margin": "auto",
+    },
+)

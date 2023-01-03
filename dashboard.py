@@ -2,108 +2,25 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 import base64, datetime
 from enrollment_pie import data_and_chart
-import io, flask, json
+import io, flask
+from pageDiv import *
 
-div_paras = json.load(open("div.json"))
 
 external_stylesheets = ["assets/upstream.css"]
 # external_stylesheets = []
 server = flask.Flask(__name__)
 app = Dash(__name__, external_stylesheets=external_stylesheets, server=server)
+
+
 buffer = io.StringIO()
 
 app.layout = html.Div(
     [
-        html.Div(
-            [
-                html.Img(
-                    src="assets/widetim.png",
-                    height="77%",
-                    # style={"height": "10%", "float": "left"},
-                ),
-                html.Div(
-                    [
-                        dcc.Markdown(
-                            """
-                            Feed Wide Tim a Pie with unmodified `classlst.xls` or `prereg.xls` from the [registrar](http://student.mit.edu/cgi-docs/instructor.html)."""
-                        ),
-                        # dcc.Markdown(
-                        #     """
-                        #     - [ ] Proper Processing of Multiple File Upload
-                        #     - [ ] Access Control
-                        #     """
-                        # ),
-                    ],
-                ),
-            ],
-            style={"height": "150px", "display": "flex", "flexDirection": "row"},
-        ),
-        dcc.Upload(
-            id="upload-data",
-            children=html.Div(
-                [
-                    "Drag and Drop or ",
-                    html.A("Select Files"),
-                    dcc.Markdown(
-                        """**The data is stored and processed in your current browser session only; that is, no sheet info is stored on the server.**"""
-                    ),
-                ]
-            ),
-            style={
-                "width": "100%",
-                "lineHeight": "30px",
-                "borderWidth": "1.5px",
-                "borderStyle": "dashed",
-                "borderRadius": "15px",
-                "textAlign": "center",
-                "margin": "20px",
-            },
-            # Allow multiple files to be uploaded
-            multiple=True,
-        ),
-        html.Div(
-            [
-                html.Div(
-                    [
-                        "Select a demo course",
-                        dcc.Dropdown(
-                            div_paras["CourseList"], value="Select Course", id="by"
-                        ),
-                    ],
-                    style={"width": "30%", "float": "left"},
-                ),
-                # html.Br(),
-                html.Div(
-                    style={"width": "10%", "float": "left"},
-                ),
-                html.Div(
-                    [
-                        "Group by",
-                        dcc.RadioItems(
-                            ["dept", "year"],
-                            "dept",
-                            id="dept_or_year",
-                            inline=False,
-                            labelStyle={"display": "block"},
-                        ),
-                    ],
-                    style={"width": "30%", "float": "left"},
-                ),
-            ],
-            style={"display": "flex", "flexDirection": "row", "width": "100%"},
-        ),
-        # dcc.Tabs(
-        #     id="tabs",
-        #     value="dept",
-        #     children=[
-        #         dcc.Tab(label="By Department", value="dept"),
-        #         dcc.Tab(label="By Year", value="year"),
-        #     ],
-        # ),
-        html.Div(id="tabs-content", style={"width": "100%"}),
-        # dcc.Slider(
-        #     min=0, max=20, step=5, value=10, id="my-slider", marks=div_paras["Years"]
-        # )
+        tim_banner,
+        upload_block,
+        html.Br(),
+        pie_controls,
+        html.Div(id="real_pie", style={"width": "100%", "margin": "auto"}),
         # html.A(
         #     html.Button("Download as HTML"),
         #     id="download",
@@ -116,7 +33,7 @@ app.title = "Tim Enrollment Pie"
 
 
 @app.callback(
-    Output("tabs-content", "children"),
+    Output("real_pie", "children"),
     Input("upload-data", "contents"),
     Input("dept_or_year", "value"),
     State("upload-data", "filename"),
