@@ -9,11 +9,6 @@ logo_style = {
 }
 tim_banner = html.Center(
     [
-        html.A(
-            html.Img(src="assets/widetim.png", style=logo_style, id="tim"), href="/"
-        ),
-        html.Br(),
-        html.Br(),
         dbc.Row(
             [
                 dbc.Col(
@@ -23,81 +18,89 @@ tim_banner = html.Center(
                     ),
                     width=11,
                 ),
-                dbc.Col(
-                    dbc.Button(
-                        "A taste of (half-baked) pie",
-                        outline=True,
-                        color="secondary",
-                        className="me-1",
-                        id="demo",
-                    ),
-                    # width=1,
-                ),
             ],
             justify="center",
         ),
     ],
 )
 
-upload_block = dcc.Upload(
-    id="upload-data",
-    children=html.Div(
-        [
-            html.Br(),
-            dcc.Markdown(
-                [
-                    """ ###### Support `classlst.xls` and `prereg.xls`.""",
-                    """###### Drag/Drop sheets into the box, or click the box to select files""",
-                    """Uploaded is stored **only** in your current browser session; i.e., it evaporates once the tab is refreshed.""",
-                ],
-                style={
-                    "width": "90%",
-                    "lineHeight": "30px",
-                    "borderWidth": "1.5px",
-                    "borderStyle": "dashed",
-                    "borderRadius": "15px",
-                    "textAlign": "center",
-                    "margin": "auto",
-                },
-            ),
-        ],
-        style={
-            "width": "90%",
-            "lineHeight": "30px",
-            "textAlign": "center",
-            "margin": "auto",
-            "paddingTop": "20px",
-            "paddingBottom": "20px",
-        },
-    ),
-    multiple=True,
-    style={
-        "width": "90%",
-        "textAlign": "center",
-        "margin": "auto",
-        "display": "flex",
-        "flexDirection": "row",
-    },
+upload_block = html.Center(
+    dcc.Upload(
+        id="upload-data",
+        children=html.Div(
+            [
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                dcc.Markdown(
+                    [
+                        """ ###### Support `classlst.xls` and `prereg.xls`.""",
+                        """###### Drag/Drop sheets into the box, or click the box to select files""",
+                        """Uploaded is stored **only** in your current browser session; i.e., it evaporates once the tab is refreshed.""",
+                    ],
+                    # style={
+                    #     "width": "90%",
+                    #     "lineHeight": "30px",
+                    #     "borderWidth": "1.5px",
+                    #     "borderStyle": "dashed",
+                    #     "borderRadius": "15px",
+                    #     "textAlign": "center",
+                    #     "margin": "auto",
+                    # },
+                ),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+            ],
+            style={
+                "width": "90%",
+                "lineHeight": "30px",
+                "borderStyle": "dashed",
+                "borderWidth": "2px",
+                "textAlign": "center",
+                "margin": "auto",
+                "borderRadius": "15px",
+                "paddingTop": "20px",
+                "paddingBottom": "20px",
+            },
+        ),
+        multiple=True,
+    )
 )
 
-# demo_banner_block = dbc.Row(
-#     [
-#         dbc.Col(
-#             dcc.Markdown("""######  before uploading your own sheet..."""),
-#             width=5,
-#         ),
-#         dbc.Col(
-#             dbc.Button(
-#                 "A taste of (half-baked) demo pie",
-#                 id="demo",
-#                 style={"marginLeft": "20px"},
-#             ),
-#             width=3,
-#         ),
-#     ],
-#     justify="center",
-#     id="demo_banner",
-# )
+demo_banner_block = dbc.Row(
+    [
+        dbc.Col(
+            dbc.Button(
+                "A taste of some (half-baked) pie",
+                outline=True,
+                color="secondary",
+                className="me-1",
+                id="demo",
+            ),
+            width={"size": 3, "offset": 3, "order": "first"},
+        ),
+        dbc.Col(
+            dcc.Markdown("""feel free to click/hover around..."""),
+            width={
+                "size": 4,
+            },
+        ),
+        html.Br(),
+        html.Br(),
+        html.Br(),
+        html.Br(),
+        html.Br(),
+    ],
+    className="align-items",
+    id="demo_banner",
+)
 
 dept_or_year_upload = html.Div(
     [
@@ -175,19 +178,22 @@ example_chart = html.Div(
         html.Br(),
         html.Div(
             id="example_pie",
-            style={"width": "100%", "height": "700px", "display": "block"},
+            style={"height": "700px"},
         ),
     ]
 )
 
 uploaded_chart = html.Div(
     [
-        html.Center(dept_or_year_upload),
-        html.Div(
-            id="uploaded_pie",
-            style={
-                "width": "100%",
-            },
+        html.Center(
+            dcc.Markdown("daisd"),
+        ),
+        dbc.Col(html.Center(dept_or_year_upload)),
+        dbc.Col(
+            html.Div(
+                id="uploaded_pie",
+                style={"height": "700px"},
+            ),
         ),
     ],
     id="uploaded_chart",
