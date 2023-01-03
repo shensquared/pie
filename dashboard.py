@@ -7,6 +7,7 @@ from pageDiv import *
 
 
 external_stylesheets = ["assets/upstream.css"]
+# external_stylesheets = []
 server = flask.Flask(__name__)
 app = Dash(
     __name__,
@@ -48,14 +49,16 @@ def upload_or_example(n_clicks, list_of_contents):
     if list_of_contents:
         return (uploaded_chart, {"display": "none"})
     elif n_clicks and n_clicks > 0:
-        return example_chart, no_update
+        return (
+            example_chart,
+            no_update,
+        )
     return demo_banner_block, no_update
 
 
 @app.callback(
     Output("uploaded_pie", "children"),
     Output("topBanner", "children"),
-    Output("tim", "src"),
     Input("dept_or_year_upload", "value"),
     State("upload-data", "contents"),
     State("upload-data", "filename"),
@@ -89,14 +92,70 @@ def parse_contents(contents, tab, filename, date):
         return (
             dcc.Graph(figure=fig, style={"height": "100%"}),
             "### " + title,
-            "assets/long_tim.png",
         )
     except:
         return (
             no_update,
             "Failed to process the uploaded file. We can only process un-modified `classlst` or `prereg` list from the registrar.",
-            no_update,
         )
+
+
+@app.callback(
+    Output("tim", "src"),
+    Input("example_pie", "children"),
+    Input("upload_pie", "children"),
+)
+def update_tim(a, b):
+    return "assets/long_tim.png"
+
+
+@app.callback(
+    Output("semesterSlider", "marks"),
+    Input("courseNumber", "value"),
+)
+def update_semesters(course):
+    import os
+
+    rootDir = "data/" + course
+    for folder, subfolders, files in os.walk(rootDir):
+        if folder == rootDir:
+            break
+    ordered = [
+        "spring23",
+        "fall22",
+        "spring22",
+        "fall21",
+        "spring21",
+        "fall20",
+        "spring20",
+        "fall19",
+        "spring19",
+    ]
+    marks = {}
+    idx = 0
+    for i in ordered:
+        if i in subfolders:
+            marks[idx] = i
+            idx += 1
+    return marks
+
+
+@app.callback(
+    Output("example_pie", "children"),
+    Input("courseNumber", "value"),
+    Input("semesterSlider", "value"),
+    Input("semesterSlider", "marks"),
+    Input("dept_or_year_example", "value"),
+)
+def show_example(course, value, marks, deptYear):
+    print(marks)
+    term = marks[str(value)]
+    base = "data/" + course + "/" + term
+    f = base + "/classlst.xls"
+    if term == "spring23":
+        f = base + "/prereg.xls"
+    df, fig, title = data_and_chart(f, dept_or_year=deptYear)
+    return (dcc.Graph(figure=fig, style={"height": "100%"}),)
 
 
 if __name__ == "__main__":

@@ -105,11 +105,10 @@ dept_or_year_example = html.Div(
             style={"paddingTop": "10px"},
         ),
     ],
-    style={"float": "left"},
 )
 
 
-pie_controls = html.Div(
+pie_controls = html.Center(
     [
         html.Div(
             [
@@ -118,26 +117,28 @@ pie_controls = html.Div(
                     list(div_paras.keys())[:-1], value="Demo", id="courseNumber"
                 ),
             ],
-            style={"width": "28%", "float": "left"},
+            # style={"width": "15%", "float": "left"},
+            style={"margin": "auto", "width": "30%"},
         ),
         html.Div(
-            style={"width": "10%", "float": "left"},
+            style={"width": "5%", "float": "left"},
         ),
         html.Div(
             [
                 "Semester",
                 dcc.Slider(
-                    min=0,
-                    max=4,
                     step=1,
                     value=0,
                     id="semesterSlider",
+                    marks=None,
                 ),
             ],
-            style={"width": "33%", "float": "left"},
+            style={
+                "width": "50%",
+            },
         ),
         html.Div(
-            style={"width": "10%", "float": "left"},
+            style={"width": "5%", "float": "left"},
         ),
         dept_or_year_example,
     ],
@@ -146,7 +147,9 @@ pie_controls = html.Div(
         "flexDirection": "row",
         "width": "77%",
         "margin": "auto",
+        "paddingBottom": "10px",
     },
+    # className="justify-content-center",
     id="courseTermController",
 )
 
@@ -154,8 +157,8 @@ example_chart = html.Div(
     [
         pie_controls,
         html.Div(
-            id="example_pies",
-            style={"width": "100%", "margin": "auto"},
+            id="example_pie",
+            style={"width": "100%"},
         ),
     ]
 )
