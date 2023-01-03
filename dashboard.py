@@ -149,13 +149,16 @@ def update_semesters(course):
 )
 def show_example(course, value, marks, deptYear):
     # print(marks)
-    term = marks[str(value)]
-    base = "data/" + course + "/" + term
-    f = base + "/classlst.xls"
-    if term == "spring23":
-        f = base + "/prereg.xls"
-    df, fig, title = data_and_chart(f, dept_or_year=deptYear)
-    return (dcc.Graph(figure=fig, style={"height": "100%"}),)
+    try:
+        term = marks[str(value)]
+        base = "data/" + course + "/" + term
+        f = base + "/classlst.xls"
+        if term == "spring23":
+            f = base + "/prereg.xls"
+        df, fig, title = data_and_chart(f, dept_or_year=deptYear)
+        return (dcc.Graph(figure=fig, style={"height": "100%"}),)
+    except:
+        return html.Center(html.H1("An error occurred"))
 
 
 if __name__ == "__main__":
