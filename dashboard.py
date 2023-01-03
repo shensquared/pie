@@ -5,8 +5,10 @@ from enrollment_pie import data_and_chart
 import io, flask
 from pageDiv import *
 
+import dash_bootstrap_components as dbc
 
-external_stylesheets = ["assets/upstream.css"]
+# external_stylesheets = ["assets/upstream.css"]
+external_stylesheets = [dbc.themes.BOOTSTRAP]
 # external_stylesheets = []
 server = flask.Flask(__name__)
 app = Dash(
@@ -19,12 +21,12 @@ app.title = "Tim ❤ Enrollment Pie"
 
 # buffer = io.StringIO()
 
-app.layout = html.Div(
+app.layout = dbc.Container(
     [
         tim_banner,
         upload_block,
         html.Div(
-            [demo_banner_block],
+            [],
             id="real_pie",
             style={"width": "100%", "margin": "auto"},
         ),
@@ -52,7 +54,7 @@ def upload_or_example(n_clicks, list_of_contents):
             example_chart,
             {"display": "none"},
         )
-    return [html.Br(), html.Br(), demo_banner_block], no_update
+    return [], no_update
 
 
 @app.callback(
