@@ -8,7 +8,9 @@ logo_style = {
 }
 tim_banner = html.Center(
     [
-        html.Img(src="assets/widetim.png", style=logo_style, id="tim"),
+        html.A(
+            html.Img(src="assets/widetim.png", style=logo_style, id="tim"), href="/"
+        ),
         html.Div(
             [
                 dcc.Markdown(
@@ -40,7 +42,7 @@ upload_block = dcc.Upload(
     children=html.Div(
         [
             dcc.Markdown(
-                """(Support both `classlst.xls` and `prereg.xls`. Uploaded data is **only** stored in your current browser session; it does not stay on the server.)"""
+                """Support both `classlst.xls` and `prereg.xls`. Uploaded data is **only** stored in your current browser session (i.e., the data evaporates once the tab is refreshed.)"""
             ),
             "Drag/Drop the sheets or ",
             html.A("Select Files"),
@@ -73,7 +75,7 @@ upload_block = dcc.Upload(
 
 demo_banner_block = html.Center(
     [
-        "Or, get a taste of the pie without uploading your own sheet...",
+        "Or, get a taste of the pie without uploading your own sheet... ",
         html.Button("see half-baked example", id="demo", style={"marginLeft": "20px"}),
     ],
     id="demo_banner",
