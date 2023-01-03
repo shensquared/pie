@@ -16,7 +16,7 @@ tim_banner = html.Div(
             [
                 dcc.Markdown("""### Feed Wide Tim A Pie..."""),
                 dcc.Markdown(
-                    """#### with an un-modified registrar `classlst.xls` or `prereg.xls` sheet"""
+                    """##### with an un-modified registrar `classlst.xls` or `prereg.xls` sheet"""
                 ),
                 # html.Div(
                 #     [
@@ -39,8 +39,8 @@ tim_banner = html.Div(
     ],
     style={
         "width": "90%",
-        "lineHeight": "30px",
-        "height": "150px",
+        "lineHeight": "20px",
+        "height": "139px",
         "float": "right",
         # "textAlign": "center",
         "margin": "auto",
@@ -87,7 +87,7 @@ pie_controls = html.Div(
         html.Div(
             [
                 "Select a demo course",
-                dcc.Dropdown(div_paras["CourseList"], value="Demo", id="by"),
+                dcc.Dropdown(div_paras["CourseList"], value="Demo", id="courseNumber"),
             ],
             style={"width": "30%", "float": "left"},
         ),
@@ -96,15 +96,17 @@ pie_controls = html.Div(
         ),
         html.Div(
             [
+                "Last pie slice by",
                 dcc.RadioItems(
                     options=[
-                        dict(label="Detail by dept", value="dept"),
-                        dict(label="Detail by class year", value="year"),
+                        dict(label="by dept", value="dept"),
+                        dict(label="by class year", value="year"),
                     ],
                     value="dept",
                     id="dept_or_year",
-                    inline=False,
-                    labelStyle={"display": "block"},
+                    inline=True,
+                    # labelStyle={"display": "block"},
+                    style={"padding-top": "10px"},
                 ),
             ],
             style={"width": "30%", "float": "left"},
@@ -114,13 +116,12 @@ pie_controls = html.Div(
         ),
         html.Div(
             [
-                "Year",
+                "Semester",
                 dcc.Slider(
                     min=0,
-                    max=20,
-                    step=5,
-                    value=10,
-                    id="my-slider",
+                    max=4,
+                    value=0,
+                    id="semesterSlider",
                 ),
             ],
             style={"width": "30%", "float": "left"},
