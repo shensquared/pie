@@ -54,8 +54,10 @@ upload_block = dcc.Upload(
             dcc.Markdown(
                 """(Support both `classlst.xls` and `prereg.xls`. Uploaded data is stored in your current browser session **only** and does not stay on the server.)"""
             ),
-            "Drag and Drop or ",
+            "Drag/Drop Sheets, or ",
             html.A("Select Files"),
+            ", or ",
+            html.Button("demo"),
         ],
         style={
             "width": "90%",
@@ -66,6 +68,7 @@ upload_block = dcc.Upload(
             "textAlign": "center",
             "margin": "auto",
             "padding-top": "20px",
+            "padding-bottom": "20px",
         },
     ),
     multiple=True,
@@ -113,7 +116,7 @@ pie_controls = html.Div(
         ),
         html.Div(
             [
-                "Last pie slice by",
+                "Slice the last pie by",
                 dcc.RadioItems(
                     options=[
                         dict(label="by dept", value="dept"),
