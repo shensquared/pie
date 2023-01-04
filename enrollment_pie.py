@@ -49,7 +49,7 @@ def read_into_df(file):
             return new_s
 
     def process_f(f):
-        CourseTitle = ""
+        CourseTitle = "Sheet has been modified; header title is missing."
         subTitle = ""
         for (idx, line) in enumerate(f):
             if idx == 0 and (line.startswith("SP") or line.startswith("FA")):
