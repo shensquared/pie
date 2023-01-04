@@ -36,8 +36,8 @@ upload_block = html.Center(
                 html.Br(),
                 dcc.Markdown(
                     [
-                        """ ###### Support `classlst.xls` and `prereg.xls`.""",
-                        """###### Drag/Drop sheets into this box, or click this box to select files""",
+                        """###### Drag/Drop sheets into this box, or click this box to select files and make your own pie.""",
+                        """###### Support `classlst.xls` and `prereg.xls`.""",
                         """Uploaded sheet/data is stored **only** in your current browser session; i.e., it evaporates 👻 once your tab is refreshed.""",
                     ],
                 ),
@@ -69,25 +69,25 @@ demo_banner_block = html.Center(
         [
             dbc.Col(
                 dbc.Button(
-                    "A taste (demo)",
+                    "(demo) for a taste",
                     color="primary",
                     className="me-1",
                     id="demo",
                 ),
                 # width=1
-                width={"size": 1, "offset": 3, "order": "first"},
+                # width={"size": 1, "offset": 3, "order": "first"},
             ),
-            dbc.Col(
-                [
-                    dcc.Markdown(
-                        "click & hover over slices for a taste of some (half-baked) pie",
-                    ),
-                ],
-                width=6
-                # width={
-                # "size": 8,
-                # },
-            ),
+            # dbc.Col(
+            #     [
+            #         dcc.Markdown(
+            #             "click & hover over slices for a taste of some (half-baked) pie",
+            #         ),
+            #     ],
+            #     width=6
+            #     # width={
+            #     # "size": 8,
+            #     # },
+            # ),
             html.Br(),
             html.Br(),
             html.Br(),
