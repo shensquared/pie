@@ -13,7 +13,7 @@ tim_banner = html.Center(
             [
                 dbc.Col(
                     dcc.Markdown(
-                        """#### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets...""",
+                        """#### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets 📜""",
                     ),
                     width=11,
                 ),
@@ -64,30 +64,38 @@ upload_block = html.Center(
     )
 )
 
-demo_banner_block = dbc.Row(
-    [
-        dbc.Col(
-            dbc.Button(
-                "A taste of some (half-baked) pie",
-                color="primary",
-                className="me-1",
-                id="demo",
+demo_banner_block = html.Center(
+    dbc.Row(
+        [
+            dbc.Col(
+                dbc.Button(
+                    "A taste (demo)",
+                    color="primary",
+                    className="me-1",
+                    id="demo",
+                ),
+                # width=1
+                width={"size": 1, "offset": 3, "order": "first"},
             ),
-            width={"size": 3, "offset": 3, "order": "first"},
-        ),
-        dbc.Col(
-            dcc.Markdown("""feel free to click/hover around. """),
-            width={
-                "size": 3,
-            },
-        ),
-        html.Br(),
-        html.Br(),
-        html.Br(),
-        html.Br(),
-    ],
-    align="center",
-    id="demo_banner",
+            dbc.Col(
+                [
+                    dcc.Markdown(
+                        "click & hover over slices for a taste of some (half-baked) pie",
+                    ),
+                ],
+                width=6
+                # width={
+                # "size": 8,
+                # },
+            ),
+            html.Br(),
+            html.Br(),
+            html.Br(),
+            html.Br(),
+        ],
+        align="center",
+        id="demo_banner",
+    )
 )
 
 dept_or_year_upload = html.Div(
@@ -126,7 +134,7 @@ pie_controls = dbc.Row(
         dbc.Col(
             html.Div(
                 [
-                    "Select a demo course",
+                    "Select course",
                     dcc.Dropdown(
                         list(div_paras.keys())[:-1], value="6.390", id="courseNumber"
                     ),
