@@ -9,7 +9,7 @@ import dash_bootstrap_components as dbc
 
 # https://dashcheatsheet.pythonanywhere.com/
 # external_stylesheets = ["assets/upstream.css"]
-external_stylesheets = [dbc.themes.MATERIA, dbc.icons.BOOTSTRAP]
+external_stylesheets = [dbc.themes.MATERIA]
 # external_stylesheets = []
 server = flask.Flask(__name__)
 app = Dash(
