@@ -52,8 +52,10 @@ def read_into_df(file):
         CourseTitle = "Sheet has been modified; header title is missing."
         subTitle = ""
         for (idx, line) in enumerate(f):
-            if idx == 0 and (line.startswith("S") or line.startswith("F")):
-                CourseTitle = line
+            if idx == 0:
+                line = line.replace('"', "")
+                if line.startswith("S") or line.startswith("F"):
+                    CourseTitle = line
             elif idx == 1:
                 subTitle = line
             elif not line.startswith('"9'):
