@@ -146,5 +146,5 @@ if __name__ == "__main__":
     file = base + term + "/" + filename
     # df, CourseTitle, subTitle = read_into_df(file)
     # fig = enrollment_chart(df, CourseTitle)
-    df, fig = data_and_chart(file)
+    df, fig, CourseTitle = data_and_chart(file)
     fig.show()
