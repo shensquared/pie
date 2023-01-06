@@ -1,4 +1,4 @@
-# sudo nano /etc/systemd/system/dashboard.service
+# sudo nano /etc/systemd/system/<dashboard>.service
 
 [Unit]
 Description=Gunicorn instance to serve dashboard
