@@ -116,15 +116,16 @@ def enrollment_chart(df, CourseTitle="", dept_or_year="dept"):
         df,
         path=path,
         color="major",
-        # color_discrete_sequence=px.colors.qualitative.Pastel,
+        color_discrete_sequence=px.colors.qualitative.Pastel,
         hover_name="Department",
         # hover_data=["major"],
         # hover_data={"labels": False, "major": True},
         # color_continuous_scale="RdBu",
-        color_discrete_map={"Pre-registerd": "#C2C0BF"},
+        # color_discrete_map={"Pre-registerd": "#C2C0BF"},
     )
     # fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
-    fig.update_traces(textinfo="label+percent entry+percent parent+value")
+    # fig.update_traces(textinfo="label+percent entry+percent parent+value")
+    fig.update_traces(textinfo="label")
     fig.update_layout(margin=dict(t=0, l=0, r=0, b=0))
     # fig.update_layout(
     #     title={
