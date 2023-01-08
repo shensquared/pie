@@ -2,7 +2,8 @@ import json
 import plotly.express as px
 import pandas as pd
 
-maps = json.load(open("maps.json"))
+maps_json = "data/maps.json"
+maps = json.load(open(maps_json))
 
 
 def read_into_df(file):
@@ -21,7 +22,7 @@ def read_into_df(file):
             for j in s:
                 if j != "":
                     maps["major_to_dept"][detail_major] = j
-                    with open("maps.json", "w") as f:
+                    with open(maps_json, "w") as f:
                         json.dump(maps, f, indent=4, sort_keys=True)
                     return j
 
@@ -44,7 +45,7 @@ def read_into_df(file):
                     break
             new_s = s[left:right]
             maps["major_without_spaces"][s] = new_s
-            with open("maps.json", "w") as f:
+            with open(maps_json, "w") as f:
                 json.dump(maps, f, indent=4, sort_keys=True)
             return new_s
 
@@ -115,11 +116,15 @@ def enrollment_chart(df, CourseTitle="", dept_or_year="dept"):
         df,
         path=path,
         color="major",
+        # color_discrete_sequence=px.colors.qualitative.Pastel,
         hover_name="Department",
-        hover_data=["major"],
-        color_continuous_scale="RdBu",
+        # hover_data=["major"],
+        # hover_data={"labels": False, "major": True},
+        # color_continuous_scale="RdBu",
+        color_discrete_map={"Pre-registerd": "#C2C0BF"},
     )
     # fig.update_traces(hovertemplate="Count: %{value}<extra></extra>")
+    fig.update_traces(textinfo="label+percent entry+percent parent+value")
     fig.update_layout(margin=dict(t=0, l=0, r=0, b=0))
     # fig.update_layout(
     #     title={

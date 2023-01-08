@@ -2,7 +2,7 @@ from dash import html, dcc
 import json
 import dash_bootstrap_components as dbc
 
-div_paras = json.load(open("div.json"))
+div_paras = json.load(open("data/div.json"))
 
 logo_style = {
     "height": "100px",
