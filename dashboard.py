@@ -2,7 +2,7 @@ from dash import Dash, dcc, html, no_update
 from dash.dependencies import Input, Output, State
 import base64, datetime
 from enrollment_pie import data_and_chart
-import io, flask
+import flask
 from pageDiv import *
 
 import dash_bootstrap_components as dbc
