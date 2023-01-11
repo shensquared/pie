@@ -27,7 +27,8 @@ app.layout = dbc.Container(
         html.Br(),
         html.Center(
             html.A(
-                html.Img(src="assets/widetim.png", style=logo_style, id="tim"), href="/"
+                html.Img(src="/assets/widetim.png", style=logo_style, id="tim"),
+                href="/",
             ),
         ),
         tim_banner,
