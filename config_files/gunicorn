@@ -1,5 +1,5 @@
 # sudo nano /etc/systemd/system/<dashboard>.service
-
+# sudo nano /etc/systemd/system/<dashboard>.service
 [Unit]
 Description=Gunicorn instance to serve dashboard
 After=network.target
@@ -7,9 +7,9 @@ After=network.target
 [Service]
 User=shensquared
 Group=www-data
-WorkingDirectory=/home/shensquared/coursedashboard
+WorkingDirectory=/home/shensquared/coursedashboard/
 Environment="PATH=/home/shensquared/coursedashboard/venv/bin"
-ExecStart=/home/shensquared/coursedashboard/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:4999 unix:dashboard.sock -m 007 wsgi:server
+ExecStart=/home/shensquared/coursedashboard/venv/bin/gunicorn --workers 9 --bind 127.0.0.1:4999  -m 007 wsgi:server
 
 [Install]
 WantedBy=multi-user.target
