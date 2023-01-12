@@ -42,12 +42,7 @@ app.layout = dbc.Container(
             style={"width": "100%", "margin": "auto"},
         ),
         html.Br(),
-        html.Footer(
-            dcc.Markdown(
-                "[Bug report/feature request](https://github.com/shensquared/timPie)"
-            ),
-            style={"float": "right"},
-        )
+        footer
         # html.A(
         #     html.Button("Download as HTML"),
         #     id="download",

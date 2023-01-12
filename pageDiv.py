@@ -15,7 +15,7 @@ tim_banner = html.Center(
                     dcc.Markdown(
                         """#### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets 📜""",
                     ),
-                    width=11,
+                    # width=11,
                 ),
             ],
         ),
@@ -198,4 +198,40 @@ uploaded_chart = html.Div(
         ),
     ],
     id="uploaded_chart",
+)
+
+footer = html.Footer(
+    [
+        html.Br(),
+        html.Center(
+            dbc.Row(
+                [
+                    # dbc.Col(html.P(), width=5),
+                    dbc.Col(
+                        [
+                            dcc.Markdown(
+                                """
+                                Made with ❤️ by [$\\text{Shen}^2$](https://shenshen.mit.edu)
+                                """,
+                                mathjax=True,
+                            ),
+                        ],
+                        # className="d-flex align-items-center",
+                        # width=6,
+                    ),
+                    # dbc.Col(
+                    #     # dcc.Markdown(
+                    #     #     "[Bug report/feature request]()"
+                    #     # ),
+                    #     html.I(
+                    #         className="bi bi-github large",
+                    #         href="https://github.com/shensquared/timPie",
+                    #     ),
+                    #     # style={"float": "right"},
+                    #     width=1,
+                    # ),
+                ]
+            )
+        ),
+    ]
 )
