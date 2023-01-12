@@ -188,9 +188,9 @@ def show_example(course, value, marks, deptYear):
         return None, "An error occurred"
 
 
-@server.route("/pie/")
-def hello():
-    return flask.redirect("/")
+# @server.route("/pie/")
+# def hello():
+#     return flask.redirect("/")
 
 
 if __name__ == "__main__":
