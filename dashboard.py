@@ -17,8 +17,8 @@ app = Dash(
     external_stylesheets=external_stylesheets,
     server=server,
     suppress_callback_exceptions=True,
-    # routes_pathname_prefix="/pie",
-    # requests_pathname_prefix="/pie",
+    routes_pathname_prefix="/pie/",
+    requests_pathname_prefix="/pie/",
 )
 app.title = "Tim ❤ Enrollment Pie"
 
@@ -188,7 +188,7 @@ def show_example(course, value, marks, deptYear):
         return None, "An error occurred"
 
 
-@server.route("/pie")
+@server.route("/pie/")
 def hello():
     return flask.redirect("/")
 
