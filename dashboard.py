@@ -17,6 +17,7 @@ app = Dash(
     external_stylesheets=external_stylesheets,
     server=server,
     suppress_callback_exceptions=True,
+    requests_pathname_prefix="/",
 )
 app.title = "Tim ❤ Enrollment Pie"
 
