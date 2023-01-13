@@ -53,14 +53,14 @@ class ReverseProxied(object):
 server = flask.Flask(__name__)
 
 server.wsgi_app = ReverseProxied(server.wsgi_app)
-
+# https://community.plotly.com/t/reverse-proxy-not-working-but-works-with-flask/11087/5
 app = Dash(
     __name__,
     external_stylesheets=external_stylesheets,
     server=server,
     suppress_callback_exceptions=True,
-    # routes_pathname_prefix="/pie/",
-    # requests_pathname_prefix="/pie/",
+    routes_pathname_prefix="/pie",
+    requests_pathname_prefix="/pie",
 )
 app.title = "Tim ❤ Enrollment Pie"
 
