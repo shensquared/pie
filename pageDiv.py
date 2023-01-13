@@ -2,7 +2,6 @@ from dash import html, dcc
 import json
 import dash_bootstrap_components as dbc
 
-div_paras = json.load(open("data/div.json"))
 
 logo_style = {
     "height": "100px",
@@ -136,7 +135,7 @@ pie_controls = dbc.Row(
                 [
                     "Select course",
                     dcc.Dropdown(
-                        list(div_paras.keys())[:-1], value="6.390", id="courseNumber"
+                        ["demo1", "demo2", "demo3"], value="demo1", id="courseNumber"
                     ),
                 ],
             ),
