@@ -72,7 +72,7 @@ app.layout = dbc.Container(
         html.Center(
             html.A(
                 html.Img(src="assets/widetim.png", style=logo_style, id="tim"),
-                href="/",
+                href="https://student.mit.edu/cgi-bin/sfprwcls_sel.sh",
             ),
         ),
         tim_banner,
