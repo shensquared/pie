@@ -211,6 +211,7 @@
         "UND 14": "UND",
         "UND 18": "UND",
         "UND 2": "UND",
+        "UND 2S": "UND",
         "UND 6": "UND"
     },
     "major_without_spaces": {
@@ -425,7 +426,8 @@
         "NIW X": "NIW X",
         "NONE  ": "NONE",
         "NONE   ": "NONE",
-        "RED M  ": "RED M"
+        "RED M  ": "RED M",
+        "UND 2S": "UND 2S"
     },
     "reg_can": {
         "Can": "Cancelled",
