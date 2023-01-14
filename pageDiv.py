@@ -73,10 +73,11 @@ demo_banner_block = html.Center(
                 dbc.Col(
                     [
                         dbc.Button(
-                            "(demo) for a taste",
+                            "Demo for a taste",
                             color="primary",
                             className="me-1",
                             id="demo",
+                            href="/demo",
                         ),
                         dbc.Popover(
                             html.H6("of some half-baked pie"),
@@ -104,6 +105,23 @@ demo_banner_block = html.Center(
             id="demo_banner",
         ),
         # html.Br(),
+    ]
+)
+
+upload_button = html.Center(
+    [
+        html.Br(),
+        dbc.Row(
+            dbc.Col(
+                dbc.Button(
+                    "Go make my own pie",
+                    color="primary",
+                    className="me-1",
+                    id="upload",
+                    href="/",
+                ),
+            ),
+        ),
     ]
 )
 
