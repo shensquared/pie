@@ -9,7 +9,7 @@ import dash_bootstrap_components as dbc
 
 # https://dashcheatsheet.pythonanywhere.com/
 # external_stylesheets = ["assets/upstream.css"]
-external_stylesheets = [dbc.themes.MATERIA, dbc.icons.BOOTSTRAP]
+external_stylesheets = [dbc.themes.MATERIA]
 # external_stylesheets = []
 
 
@@ -228,11 +228,6 @@ def show_example(course, value, marks, deptYear):
         return (dcc.Graph(figure=fig, style={"height": "100%"}), title)
     except:
         return None, "An error occurred"
-
-
-# @server.route("/pie/")
-# def hello():
-#     return flask.redirect("/")
 
 
 if __name__ == "__main__":
