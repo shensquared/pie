@@ -60,8 +60,8 @@ app = Dash(
     server=server,
     suppress_callback_exceptions=True,
     use_pages=True,
-    # routes_pathname_prefix="/",
-    # requests_pathname_prefix="/pie/",
+    routes_pathname_prefix="/",
+    requests_pathname_prefix="/pie/",
 )
 app.title = "Tim ❤ Enrollment Pie"
 
