@@ -1,5 +1,4 @@
 from dash import html, dcc
-import json
 import dash_bootstrap_components as dbc
 
 
