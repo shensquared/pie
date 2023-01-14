@@ -45,7 +45,11 @@
         "STS": "Science, Technology, and Society",
         "SWE": "Engineering School-Wide Electives",
         "WGS": "Women's and Gender Studies",
-        "Wellesley": "Wellesley"
+        "Wellesley": "Wellesley",
+        "Registered": "Registered",
+        "Cancelled": "Cancelled",
+        "Listener": "Listener",
+        "Pre-registered": "Pre-registered"
     },
     "major_to_dept": {
         "1 CT": "1",
