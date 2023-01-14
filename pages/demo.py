@@ -3,7 +3,7 @@ from enrollment_pie import data_and_chart
 from pageDiv import *
 
 
-register_page(__name__)
+register_page(__name__, title="Tim ❤ Enrollment Pie")
 
 layout = html.Div(
     [
@@ -20,7 +20,8 @@ layout = html.Div(
 def update_semesters(course):
     import os
 
-    rootDir = "/data/" + course
+    this = os.path.dirname(__file__)
+    rootDir = os.path.join(this, "..", "data", course)
     for folder, subfolders, files in os.walk(rootDir):
         if folder == rootDir:
             break
