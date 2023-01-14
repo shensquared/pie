@@ -4,7 +4,7 @@ import base64, datetime
 from enrollment_pie import data_and_chart
 from pageDiv import *
 
-register_page(__name__, path="/")
+register_page(__name__, path="/", title="Tim ❤ Enrollment Pie")
 
 layout = html.Div(
     [
