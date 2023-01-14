@@ -165,15 +165,6 @@ def parse_contents(contents, tab, filename, date):
         )
 
 
-# @app.callback(
-#     Output("tim", "src"),
-#     State("upload-data", "last_modified"),
-#     Input("upload_pie", "children"),
-# )
-# def update_tim(a, b):
-#     return "assets/long_tim.png"
-
-
 @app.callback(
     Output("semesterSlider", "marks"),
     Input("courseNumber", "value"),
