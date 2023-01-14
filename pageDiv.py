@@ -23,78 +23,89 @@ tim_banner = html.Center(
 )
 
 upload_block = html.Center(
-    dcc.Upload(
-        id="upload-data",
-        children=html.Div(
-            [
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                dcc.Markdown(
-                    [
-                        """###### Drag/Drop sheets into this box, or click this box to select files and make your own pie.""",
-                        """###### Support `classlst.xls` and `prereg.xls`.""",
-                        """Uploaded sheet/data is stored **only** in your current browser memory; i.e., it evaporates 👻 once your tab is refreshed.""",
-                    ],
-                ),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-            ],
-            style={
-                "width": "90%",
-                "lineHeight": "30px",
-                "borderStyle": "dashed",
-                "borderWidth": "2px",
-                "textAlign": "center",
-                "margin": "auto",
-                "borderRadius": "15px",
-                "paddingTop": "20px",
-                "paddingBottom": "20px",
-            },
+    [
+        html.Br(),
+        dcc.Upload(
+            id="upload-data",
+            children=html.Div(
+                [
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    dcc.Markdown(
+                        [
+                            """###### Drag & Drop or Click""",
+                            """###### Support `classlst.xls` or `prereg.xls`""",
+                            """Uploaded sheet is stored **only** in your browser memory; i.e., it evaporates 👻 once your tab is refreshed.""",
+                        ],
+                    ),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                    html.Br(),
+                ],
+                style={
+                    "width": "90%",
+                    "lineHeight": "30px",
+                    "borderStyle": "dashed",
+                    "borderWidth": "2px",
+                    "textAlign": "center",
+                    "margin": "auto",
+                    "borderRadius": "15px",
+                    "paddingTop": "20px",
+                    "paddingBottom": "20px",
+                },
+            ),
+            multiple=True,
         ),
-        multiple=True,
-    )
+    ]
 )
 
 demo_banner_block = html.Center(
-    dbc.Row(
-        [
-            dbc.Col(
-                dbc.Button(
-                    "(demo) for a taste",
-                    color="primary",
-                    className="me-1",
-                    id="demo",
+    [
+        html.Br(),
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        dbc.Button(
+                            "(demo) for a taste",
+                            color="primary",
+                            className="me-1",
+                            id="demo",
+                        ),
+                        dbc.Popover(
+                            html.H6("of some half-baked pie"),
+                            target="demo",
+                            body=True,
+                            trigger="hover",
+                        ),
+                    ]
+                    # width=1
+                    # width={"size": 1, "offset": 3, "order": "first"},
                 ),
-                # width=1
-                # width={"size": 1, "offset": 3, "order": "first"},
-            ),
-            # dbc.Col(
-            #     [
-            #         dcc.Markdown(
-            #             "click & hover over slices for a taste of some (half-baked) pie",
-            #         ),
-            #     ],
-            #     width=6
-            #     # width={
-            #     # "size": 8,
-            #     # },
-            # ),
-            html.Br(),
-            html.Br(),
-            html.Br(),
-            html.Br(),
-        ],
-        align="center",
-        id="demo_banner",
-    )
+                # dbc.Col(
+                #     [
+                #         dcc.Markdown(
+                #             "click & hover over slices for a taste of some (half-baked) pie",
+                #         ),
+                #     ],
+                #     width=6
+                #     # width={
+                #     # "size": 8,
+                #     # },
+                # ),
+            ],
+            align="center",
+            id="demo_banner",
+        ),
+        # html.Br(),
+    ]
 )
 
 dept_or_year_upload = html.Div(
