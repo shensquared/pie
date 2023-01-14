@@ -77,7 +77,7 @@ demo_banner_block = html.Center(
                             color="primary",
                             className="me-1",
                             id="demo",
-                            href="/demo",
+                            href="/pie/demo",
                         ),
                         dbc.Popover(
                             html.H6("of some half-baked pie"),
@@ -118,7 +118,7 @@ upload_button = html.Center(
                     color="primary",
                     className="me-1",
                     id="upload",
-                    href="/",
+                    href="/pie/",
                 ),
             ),
         ),
