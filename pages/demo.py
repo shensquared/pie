@@ -20,7 +20,7 @@ layout = html.Div(
 def update_semesters(course):
     import os
 
-    rootDir = "data/" + course
+    rootDir = "../data/" + course
     for folder, subfolders, files in os.walk(rootDir):
         if folder == rootDir:
             break
