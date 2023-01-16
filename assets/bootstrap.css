@@ -13,6 +13,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 /* @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap); */
+/* 
+@font-face {
+    font-family: "Open Sans";
+    src: url("roboto.woff2")format("woff2");
+} */
 
 :root {
     --bs-blue: #2196f3;
