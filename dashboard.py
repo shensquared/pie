@@ -10,7 +10,7 @@ import dash_bootstrap_components as dbc
 # https://dashcheatsheet.pythonanywhere.com/
 # external_stylesheets = ["assets/upstream.css"]
 external_stylesheets = [dbc.themes.MATERIA]
-# external_stylesheets = []
+external_stylesheets = ["assets/bootstrap.css"]
 
 
 class ReverseProxied(object):
