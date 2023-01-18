@@ -238,9 +238,8 @@ footer = html.Footer(
                         [
                             dcc.Markdown(
                                 """
-                                Made with ❤️ by [$\\text{Shen}^2$](https://shenshen.mit.edu)
-                                """,
-                                mathjax=True,
+                                Made with ❤️ by [Shen²](https://shenshen.mit.edu)
+                                """
                             ),
                         ],
                         # className="d-flex align-items-center",
