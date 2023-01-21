@@ -84,5 +84,5 @@ def parse_contents(contents, tab, filename, date):
     except:
         return (
             no_update,
-            "Failed to process the uploaded file. We can only process un-modified `classlst` or `prereg` list from the registrar.",
+            dcc.Markdown("Failed to process the uploaded file. We can only process un-modified `classlst.xls` or `prereg.xls` list from the registrar."),
         )
