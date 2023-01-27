@@ -162,9 +162,7 @@ pie_controls = dbc.Row(
             html.Div(
                 [
                     "Select course",
-                    dcc.Dropdown(
-                        ["demo1", "demo2", "demo3"], value="demo1", id="courseNumber"
-                    ),
+                    dcc.Dropdown(["demo1", "demo2"], value="demo1", id="courseNumber"),
                 ],
             ),
             width=2,
