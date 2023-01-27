@@ -52,7 +52,12 @@ def read_into_df(file):
     def process_f(f):
         CourseTitle = "Sheet has been modified; header title is missing."
         subTitle = ""
+        encountered_term = 0
         for (idx, line) in enumerate(f):
+            if line.startswith('"Sp') or line.startswith('"Fall'):
+                if encountered_term == 1:
+                    break
+                encountered_term += 1
             if idx == 0:
                 line = line.replace('"', "")
                 if line.startswith("S") or line.startswith("F"):
@@ -61,6 +66,7 @@ def read_into_df(file):
                 subTitle = line
             elif not line.startswith('"9'):
                 continue
+
             fields = line.split("\t")
             if len(fields) <= 4:
                 continue
@@ -151,7 +157,7 @@ def data_and_chart(f, dept_or_year="dept"):
 
 
 if __name__ == "__main__":
-    base = "/Users/shenshen/Codes/3900/000admin/sheets/"
+    base = "/Users/shenshen/Codes/courseAdmin/sheets/"
     term = "spring23"
     filename = "prereg.xls"
     file = base + term + "/" + filename
