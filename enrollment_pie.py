@@ -49,10 +49,9 @@ def read_into_df(file):
                 json.dump(maps, f, indent=4, sort_keys=True)
             return new_s
 
-    def process_f(f):
+    def process_f(f, encountered_term=0):
         CourseTitle = "Sheet has been modified; header title is missing."
         subTitle = ""
-        encountered_term = 0
         for (idx, line) in enumerate(f):
             if line.startswith('"Sp') or line.startswith('"Fall'):
                 if encountered_term == 1:
@@ -98,7 +97,7 @@ def read_into_df(file):
         return df, CourseTitle, subTitle
 
     if type(file) is list:
-        df, CourseTitle, subTitle = process_f(file)
+        df, CourseTitle, subTitle = process_f(file, encountered_term=1)
     else:
         with open(file) as f:
             df, CourseTitle, subTitle = process_f(f)
