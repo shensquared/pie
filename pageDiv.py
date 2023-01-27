@@ -238,7 +238,7 @@ footer = html.Footer(
                         [
                             dcc.Markdown(
                                 """
-                                Made with ❤️ by [Shen²](https://shenshen.mit.edu)
+                                Made with ❤️ by [Shen²](https://shenshen.mit.edu) [[issue/request](https://github.com/shensquared/timPie)]
                                 """
                             ),
                         ],
