@@ -41,8 +41,6 @@ upload_block = html.Center(
                             """The data is stored **only** in your browser memory; i.e., it evaporates 👻 once your tab is refreshed.""",
                         ],
                     ),
-                        ],
-                    ),
                     html.Br(),
                     html.Br(),
                     html.Br(),
