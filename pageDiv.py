@@ -162,7 +162,9 @@ pie_controls = dbc.Row(
             html.Div(
                 [
                     "Select course",
-                    dcc.Dropdown(["demo1", "demo2"], value="demo1", id="courseNumber"),
+                    dcc.Dropdown(
+                        ["6.8210", "demo1", "demo2"], value="6.8210", id="courseNumber"
+                    ),
                 ],
             ),
             width=2,
@@ -211,7 +213,7 @@ example_chart = html.Div(
 uploaded_chart = html.Div(
     [
         html.Center(
-            html.H3("", id="upload_title"),
+            html.H3(id="upload_title"),
         ),
         dbc.Col(html.Center(dept_or_year_upload)),
         html.Br(),
@@ -225,6 +227,7 @@ uploaded_chart = html.Div(
     id="uploaded_chart",
 )
 
+
 footer = html.Footer(
     [
         html.Br(),
@@ -236,7 +239,7 @@ footer = html.Footer(
                         [
                             dcc.Markdown(
                                 """
-                                Made with ❤️ by [Shen²](https://shenshen.mit.edu) [[issue/request](https://github.com/shensquared/timPie)]
+                                Made with ❤️ by [Shen²](https://shenshen.mit.edu)
                                 """
                             ),
                         ],

@@ -35,6 +35,7 @@ def update_semesters(course):
         "spring20",
         "fall19",
         "spring19",
+        "spring23",
     ]
     marks = {}
     idx = 0
@@ -62,8 +63,8 @@ def show_example(course, value, marks, deptYear):
     try:
         base = "data/" + course + "/" + term
         f = base + "/classlst.xls"
-        if term == "spring23":
-            f = base + "/prereg.xls"
+        # if term == "spring23":
+        # f = base + "/prereg.xls"
         df, fig, title = data_and_chart(f, dept_or_year=deptYear)
         return (dcc.Graph(figure=fig, style={"height": "100%"}), title)
     except:
