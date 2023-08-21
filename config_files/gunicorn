@@ -1,16 +1,16 @@
-# sudo nano /etc/systemd/system/<dashboard>.service
-# sudo systemctl enable dashboard.service
-# sudo systemctl restart dashboard
+# sudo nano /etc/systemd/system/pie.service
+# sudo systemctl enable pie.service
+# sudo systemctl restart pie
 [Unit]
-Description=Gunicorn instance to serve dashboard
+Description=Gunicorn instance to serve pie
 After=network.target
 
 [Service]
-User=shensquared
+User=shenshen
 Group=www-data
-WorkingDirectory=/home/shensquared/coursedashboard/
-Environment="PATH=/home/shensquared/coursedashboard/venv/bin"
-ExecStart=/home/shensquared/coursedashboard/venv/bin/gunicorn --workers 9 --bind 127.0.0.1:4999  -m 007 wsgi:server
+WorkingDirectory=/home/shenshen/code/pie
+Environment="PATH=/home/shenshen/code/pie/.venv/bin"
+ExecStart=/home/shenshen/code/pie/.venv/bin/gunicorn --workers 13 --bind 127.0.0.1:4999  -m 007 wsgi:server
 
 [Install]
 WantedBy=multi-user.target
