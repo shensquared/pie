@@ -26,15 +26,15 @@ def update_semesters(course):
         if folder == rootDir:
             break
     ordered = [
-        "spring12",
         "fall01",
-        "spring03",
-        "fall21",
         "spring02",
-        "fall20",
-        "spring20",
-        "fall19",
+        "spring03",
+        "spring12",
         "spring19",
+        "fall19",
+        "spring20",
+        "fall20",
+        "fall21",
         "fall22",
         "spring23",
         "fall23",

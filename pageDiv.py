@@ -163,8 +163,8 @@ pie_controls = dbc.Row(
                 [
                     "Select course",
                     dcc.Dropdown(
-                        ["6.8210", "demo1", "demo2"],
-                        value="demo1",
+                        ["6.8210", "demo2"],
+                        value="demo2",
                         id="courseNumber",
                     ),
                 ],
