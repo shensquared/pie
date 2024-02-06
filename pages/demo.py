@@ -38,6 +38,7 @@ def update_semesters(course):
         "fall22",
         "spring23",
         "fall23",
+        "spring24",
     ]
     marks = {}
     idx = 0
