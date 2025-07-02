@@ -138,6 +138,7 @@ dept_or_year_upload = html.Div(
             labelCheckedClassName="active",
         ),
     ],
+    style={"display": "flex", "alignItems": "center", "justifyContent": "center", "gap": "10px"},
 )
 
 dept_or_year_example = html.Div(
@@ -152,7 +153,15 @@ dept_or_year_example = html.Div(
             labelClassName="btn btn-outline-primary",
             labelCheckedClassName="active",
         ),
+        html.A(
+            html.Button("Download as HTML", className="btn btn-primary ms-2"),
+            id="download-chart-demo",
+            href="",
+            download="enrollment_chart_demo.html",
+            style={"display": "none"},
+        ),
     ],
+    style={"display": "flex", "alignItems": "center", "justifyContent": "center", "gap": "10px"},
 )
 
 
@@ -217,16 +226,24 @@ uploaded_chart = html.Div(
         html.Center(
             html.H3(id="upload_title"),
         ),
-        dbc.Col(html.Center(dept_or_year_upload)),
+        html.Center(dept_or_year_upload),
+        html.Div(
+            id="uploaded_pie",
+            style={"height": "700px", "marginTop": "10px"},
+        ),
         html.Br(),
-        dbc.Col(
-            html.Div(
-                id="uploaded_pie",
-                style={"height": "700px"},
+        html.Center(
+            html.A(
+                html.Button("Download as HTML", className="btn btn-primary"),
+                id="download-chart",
+                href="",
+                download="enrollment_chart.html",
+                style={"display": "none"},
             ),
         ),
     ],
     id="uploaded_chart",
+    style={"marginTop": "-5rem"},
 )
 
 
