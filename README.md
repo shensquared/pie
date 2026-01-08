@@ -2,8 +2,6 @@
 
 A web-based visualization tool for MIT course enrollment data. Upload registrar enrollment sheets and get interactive sunburst charts showing student distribution by department and year.
 
-![Demo](assets/pie.gif)
-
 ## Features
 
 - **Drag & drop upload** - supports `classlst.xls` and `prereg.xls` from the MIT registrar
