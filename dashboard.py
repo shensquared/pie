@@ -1,3 +1,4 @@
+import os
 from dash import Dash, dcc, html, no_update, page_container
 from dash.dependencies import Input, Output, State
 import base64, datetime
@@ -11,6 +12,9 @@ import dash_bootstrap_components as dbc
 # external_stylesheets = ["assets/upstream.css"]
 # external_stylesheets = [dbc.themes.MATERIA]
 external_stylesheets = ["assets/bootstrap.css"]
+
+# Use /pie/ prefix in production (behind nginx), / for local dev
+URL_PREFIX = os.environ.get("URL_PREFIX", "/")
 
 
 class ReverseProxied(object):
@@ -61,7 +65,7 @@ app = Dash(
     suppress_callback_exceptions=True,
     use_pages=True,
     routes_pathname_prefix="/",
-    requests_pathname_prefix="/pie/",
+    requests_pathname_prefix=URL_PREFIX,
 )
 app.title = "Tim ❤ Enrollment Pie"
 
@@ -221,4 +225,4 @@ app.layout = dbc.Container(
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run(debug=True, port=8050)

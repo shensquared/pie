@@ -1,4 +1,10 @@
 /venv
+
+# Enrollment data (contains PII) - should not be committed
+# Users upload their own data at runtime
+data/**/*.xls
+data/**/*.xlsx
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

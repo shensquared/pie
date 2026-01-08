@@ -11,7 +11,6 @@ register_page(__name__, path="/", title="Tim ❤ Enrollment Pie")
 layout = html.Div(
     [
         tim_banner,
-        demo_banner_block,
         upload_block,
         html.Div(
             [],
@@ -26,7 +25,6 @@ layout = html.Div(
     Output("real_pie", "children"),
     Output("upload-data", "style"),
     Output("make_banner", "style"),
-    Output("demo_banner", "style"),
     Input("upload-data", "contents"),
 )
 def upload_or_example(list_of_contents):
@@ -35,9 +33,8 @@ def upload_or_example(list_of_contents):
             uploaded_chart,
             {"display": "none"},
             {"display": "none"},
-            {"display": "none"},
         )
-    return [], no_update, no_update, no_update
+    return [], no_update, no_update
 
 
 @callback(

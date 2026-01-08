@@ -13,7 +13,6 @@ tim_banner = html.Center(
                     dcc.Markdown(
                         """#### ❤️ make wide tim some pie 🥧 with the registrar enrollment sheets 📜""",
                     ),
-                    # width=11,
                 ),
             ],
         ),
@@ -65,66 +64,6 @@ upload_block = html.Center(
     ]
 )
 
-demo_banner_block = html.Center(
-    [
-        html.Br(),
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        dbc.Button(
-                            "Demo for a taste",
-                            color="primary",
-                            className="me-1",
-                            id="demo",
-                            href="/pie/demo",
-                        ),
-                        dbc.Popover(
-                            html.H6("of some half-baked pie"),
-                            target="demo",
-                            body=True,
-                            trigger="hover",
-                        ),
-                    ]
-                    # width=1
-                    # width={"size": 1, "offset": 3, "order": "first"},
-                ),
-                # dbc.Col(
-                #     [
-                #         dcc.Markdown(
-                #             "click & hover over slices for a taste of some (half-baked) pie",
-                #         ),
-                #     ],
-                #     width=6
-                #     # width={
-                #     # "size": 8,
-                #     # },
-                # ),
-            ],
-            align="center",
-            id="demo_banner",
-        ),
-        # html.Br(),
-    ]
-)
-
-upload_button = html.Center(
-    [
-        html.Br(),
-        dbc.Row(
-            dbc.Col(
-                dbc.Button(
-                    "Go make my own pie",
-                    color="primary",
-                    className="me-1",
-                    id="upload",
-                    href="/pie/",
-                ),
-            ),
-        ),
-    ]
-)
-
 dept_or_year_upload = html.Div(
     [
         "Slice the pie crust by",
@@ -139,86 +78,6 @@ dept_or_year_upload = html.Div(
         ),
     ],
     style={"display": "flex", "alignItems": "center", "justifyContent": "center", "gap": "10px"},
-)
-
-dept_or_year_example = html.Div(
-    [
-        "Slice the pie crust by",
-        dbc.RadioItems(
-            options=["dept", "year"],
-            value="dept",
-            id="dept_or_year_example",
-            className="btn-group",
-            inputClassName="btn-check",
-            labelClassName="btn btn-outline-primary",
-            labelCheckedClassName="active",
-        ),
-        html.A(
-            html.Button("Download as HTML", className="btn btn-primary ms-2"),
-            id="download-chart-demo",
-            href="",
-            download="enrollment_chart_demo.html",
-            style={"display": "none"},
-        ),
-    ],
-    style={"display": "flex", "alignItems": "center", "justifyContent": "center", "gap": "10px"},
-)
-
-
-pie_controls = dbc.Row(
-    [
-        dbc.Col(
-            html.Div(
-                [
-                    "Select course",
-                    dcc.Dropdown(
-                        ["6.8210", "demo2"],
-                        value="demo2",
-                        id="courseNumber",
-                    ),
-                ],
-            ),
-            width=2,
-        ),
-        dbc.Col(
-            width=1,
-        ),
-        dbc.Col(
-            html.Div(
-                [
-                    "Semester",
-                    dcc.Slider(
-                        step=1,
-                        value=1,
-                        id="semesterSlider",
-                        marks=None,
-                    ),
-                ],
-            ),
-            width=5,
-        ),
-        dbc.Col(
-            width=1,
-        ),
-        dbc.Col(dept_or_year_example),
-    ],
-    className="align-items-md-stretch",
-    id="courseTermController",
-)
-
-example_chart = html.Div(
-    [
-        html.Br(),
-        html.Center(
-            html.H3("", id="example_title"),
-        ),
-        pie_controls,
-        html.Br(),
-        html.Div(
-            id="example_pie",
-            style={"height": "700px"},
-        ),
-    ]
 )
 
 uploaded_chart = html.Div(
@@ -251,32 +110,18 @@ footer = html.Footer(
     [
         html.Br(),
         html.Center(
-            dbc.Row(
+            html.Div(
                 [
-                    # dbc.Col(html.P(), width=5),
-                    dbc.Col(
-                        [
-                            dcc.Markdown(
-                                """
-                                Made with ❤️ by [Shen²](https://shenshen.mit.edu)
-                                """
-                            ),
-                        ],
-                        # className="d-flex align-items-center",
-                        # width=6,
+                    html.Span("made with ❤️ by "),
+                    html.A("shensquared", href="https://shenshen.mit.edu", target="_blank"),
+                    html.Span(" · "),
+                    html.A(
+                        html.Img(src="assets/github.svg", style={"height": "20px", "verticalAlign": "middle"}),
+                        href="https://github.com/shensquared/pie",
+                        target="_blank",
                     ),
-                    # dbc.Col(
-                    #     # dcc.Markdown(
-                    #     #     "[Bug report/feature request]()"
-                    #     # ),
-                    #     html.I(
-                    #         className="bi bi-github large",
-                    #         href="https://github.com/shensquared/timPie",
-                    #     ),
-                    #     # style={"float": "right"},
-                    #     width=1,
-                    # ),
-                ]
+                ],
+                style={"display": "inline-flex", "alignItems": "center", "gap": "4px"},
             )
         ),
     ]
