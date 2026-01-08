@@ -2,7 +2,7 @@
 
 A web-based visualization tool for MIT course enrollment data. Upload registrar enrollment sheets and get interactive sunburst charts showing student distribution by department and year.
 
-![Wide Tim](assets/widetim.png)
+![Demo](assets/pie.gif)
 
 ## Features
 
